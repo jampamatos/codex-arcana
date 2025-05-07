@@ -39,10 +39,12 @@ jobs:
       - name: Test ${{ matrix.package }}
         run: pnpm --filter ${{ matrix.package }} test
 
-      - name: Build ${{ matrix.package }}
+      - name: Build non-ssg packages
+        if: ${{ matrix.package != 'ssg' }}
         run: pnpm --filter ${{ matrix.package }} build
 
       - name: Build ssg
         if: ${{ matrix.package == 'ssg' }}
         working-directory: ./ssg
         run: pnpm build
+
