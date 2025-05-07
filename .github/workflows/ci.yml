@@ -30,6 +30,9 @@ jobs:
         with:
           version: latest
 
+      - name: Clean install
+        run: pnpm install --force
+      
       - name: Install dependencies
         run: pnpm install
 
@@ -45,5 +48,5 @@ jobs:
 
       - name: Build ssg
         if: ${{ matrix.package == 'ssg' }}
-        run: pnpm --filter ssg exec docusaurus build --config ./ssg/docusaurus.config.ts
+        run: pnpm --filter ssg exec docusaurus build --config docusaurus.config.ts
 
