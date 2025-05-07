@@ -48,5 +48,6 @@ jobs:
 
       - name: Build ssg
         if: ${{ matrix.package == 'ssg' }}
-        run: pnpm --filter ssg exec docusaurus build --config docusaurus.config.ts
+        working-directory: ./ssg
+        run: pnpm exec docusaurus build
 
