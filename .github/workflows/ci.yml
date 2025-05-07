@@ -48,6 +48,8 @@ jobs:
 
       - name: Build ssg
         if: ${{ matrix.package == 'ssg' }}
-        working-directory: ./ssg
-        run: pnpm exec docusaurus build
+        run: |
+          cd ssg
+          pnpm install --frozen-lockfile
+          pnpm run build
 
