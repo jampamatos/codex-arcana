@@ -31,7 +31,7 @@ jobs:
           version: latest
 
       - name: Install dependencies
-        run: pnpm install --include-workspace-root
+        run: pnpm install
 
       - name: Lint ${{ matrix.package }}
         run: pnpm --filter ${{ matrix.package }} lint
