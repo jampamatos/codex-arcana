@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-    name: Lint, Test & Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,11 +23,10 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Prepare pnpm
-        run: corepack prepare pnpm@latest --activate
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
 
       - name: Install dependencies
         run: pnpm install
