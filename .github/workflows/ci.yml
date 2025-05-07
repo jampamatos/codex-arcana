@@ -16,25 +16,26 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Enable Corepack (for pnpm)
+      - name: Enable Corepack
         run: corepack enable
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          # removemos cache: pnpm daqui
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
 
-      - name: Clean install
-        run: pnpm install --force
-      
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --force
+
+      # Passo específico para o Electron
+      - name: Install Electron (app only)
+        if: ${{ matrix.package == 'app' }}
+        run: pnpm add electron --workspace=app
 
       - name: Lint ${{ matrix.package }}
         run: pnpm --filter ${{ matrix.package }} lint
@@ -50,4 +51,3 @@ jobs:
         if: ${{ matrix.package == 'ssg' }}
         working-directory: ./ssg
         run: pnpm exec docusaurus build
-
