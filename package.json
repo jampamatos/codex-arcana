@@ -2,6 +2,7 @@
     "name": "codex-arcana",
     "version": "0.1.0",
     "private": true,
-    "workspaces": ["app", "server", "ssg"]
+    "workspaces": ["app", "server", "ssg"],
+    "packageManager": "pnpm@10.10.0"
   }
   
