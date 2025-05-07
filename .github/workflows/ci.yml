@@ -1,46 +1,43 @@
 name: CI
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-    build:
-        name: Lint, Test & Build
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                package: [app, server, ssg]
-        steps:
-            - name: Checout repo
-              uses: actions/checkout@v3
+  build:
+    name: Lint, Test & Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [app, server, ssg]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '18'
-                  cache: 'pnpm'
-                  cache-dependency-path: pnpm-lock.yaml
-            
-            - name: Enable Corepack
-              run: corepack enable
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
 
-            - name: Prepare pnpm
-              run: corepack prepare pnpm@latest --activate
+      - name: Enable Corepack
+        run: corepack enable
 
-            - name: Install dependencies
-              run: pnpm install
-            
-            - name: Install dependencies
-              run: pnpm install
+      - name: Prepare pnpm
+        run: corepack prepare pnpm@latest --activate
 
-            - name: Lint ${{ matrix.package }}
-              run: pnpm -filter ${{ matrix.package }} lint
-            
-            - name: Test ${{ matrix.package }}
-              run: pnpm --filter ${{ matrix.package }} test
+      - name: Install dependencies
+        run: pnpm install
 
-            - name: Build ${{ matrix.package }}
-              run: pnpm --filter ${{ matrix.package }} build
+      - name: Lint ${{ matrix.package }}
+        run: pnpm --filter ${{ matrix.package }} lint
+
+      - name: Test ${{ matrix.package }}
+        run: pnpm --filter ${{ matrix.package }} test
+
+      - name: Build ${{ matrix.package }}
+        run: pnpm --filter ${{ matrix.package }} build
