@@ -30,12 +30,7 @@ jobs:
           version: latest
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --force
-
-      # Passo específico para o Electron
-      - name: Install Electron (app only)
-        if: ${{ matrix.package == 'app' }}
-        run: pnpm add electron --workspace=app
+        run: pnpm install --frozen-lockfile
 
       - name: Lint ${{ matrix.package }}
         run: pnpm --filter ${{ matrix.package }} lint
