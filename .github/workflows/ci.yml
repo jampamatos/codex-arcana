@@ -8,41 +8,71 @@ on:
 
 jobs:
   build:
+    name: Lint, Test & Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
         package: [app, server, ssg]
     steps:
-      - name: Checkout repo
+      # 1. Checkout the repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
+      # 2. Enable Corepack so pnpm is available
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Setup Node.js
+      # 3. Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Setup pnpm
+      # 4. Install pnpm via official action
+      - name: Set up pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
 
-      - name: Install dependencies
+      # 5. Cache pnpm store between runs
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      # 6. Install all dependencies at the root
+      - name: Install root dependencies
         run: pnpm install --frozen-lockfile
 
+      # 7. Lint
       - name: Lint ${{ matrix.package }}
         run: pnpm --filter ${{ matrix.package }} lint
 
+      # 8. Test
       - name: Test ${{ matrix.package }}
         run: pnpm --filter ${{ matrix.package }} test
 
-      - name: Build non-ssg packages
-        if: ${{ matrix.package != 'ssg' }}
-        run: pnpm --filter ${{ matrix.package }} build
+      # 9. Prepare the Electron app for packaging
+      - name: Prepare app for packaging
+        if: ${{ matrix.package == 'app' }}
+        run: |
+          cd app
+          pnpm install --frozen-lockfile
 
+      # 10. Build app & server
+      - name: Build app and server
+        if: ${{ matrix.package != 'ssg' }}
+        run: |
+          cd ${{ matrix.package }}
+          pnpm run build
+
+      # 11. Build the SSG (Docusaurus site)
       - name: Build ssg
         if: ${{ matrix.package == 'ssg' }}
-        working-directory: ./ssg
-        run: pnpm exec docusaurus build
+        run: |
+          cd ssg
+          pnpm install --frozen-lockfile
+          pnpm run build
