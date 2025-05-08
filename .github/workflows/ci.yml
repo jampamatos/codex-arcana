@@ -58,16 +58,12 @@ jobs:
       # 9. Prepare the Electron app for packaging
       - name: Prepare app for packaging
         if: ${{ matrix.package == 'app' }}
-        run: |
-          cd app
-          pnpm install --frozen-lockfile
+        run: pnpm install --filter app --frozen-lockfile
 
       # 10. Build app & server
       - name: Build app and server
         if: ${{ matrix.package != 'ssg' }}
-        run: |
-          cd ${{ matrix.package }}
-          pnpm run build
+        run: pnpm --filter app exec electron-forge make
 
       # 11. Build the SSG (Docusaurus site)
       - name: Build ssg
