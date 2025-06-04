@@ -1,12 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-    background-color:red;
+  background-color: red;
 }
 
-.centralized {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 2rem;
-  color: white;
-}
+
