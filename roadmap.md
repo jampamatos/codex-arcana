@@ -79,17 +79,18 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
 1. **Criar e Configurar Repositório GitHub**
 
 - [X] Criar repositório público ou privado (a sua escolha).
-- [ ] Adicionar .gitignore para Go, Node, Wails.
-- [ ] Criar README.md inicial com instruções de setup.
+- [X] Adicionar .gitignore para Go, Node, Wails.
+- [X] Criar README.md inicial com instruções de setup.
 
 2. **Configurar Skeleton Go + Wails**
 
-- [ ] Instalar Go (se ainda não tiver).
-- [ ] Instalar Wails localmente (go install github.com/wailsapp/wails/v2/cmd/wails@latest).
-- [ ] No diretório raiz, executar `wails init -n backend -t standard` (ou copiar template padrão).
-- [ ] Ajustar go.mod para `module codex-arcana/backend`.
-- [ ] Em `main.go`, criar handler para `/ping` e `/api/version`.
-- [ ] Executar `wails dev` para testar servidor+frontend integrado minimal. (Mas podemos separar: foco só no servidor Go, sem ainda empacotar no Wails).
+- [X] Instalar Go (se ainda não tiver).
+- [X] Instalar Wails localmente (go install github.com/wailsapp/wails/v2/cmd/wails@latest).
+- [X] No diretório raiz, executar `wails init -n backend -t standard` (ou copiar template padrão). 
+  - Na verdade, o comando foi `wails init -n backend -t vanilla`, porque o template `standard` não estava disponível.
+- [X] Ajustar `go.mod` para `module codex-arcana/backend`.
+- [X] Em `main.go`, criar handler para `/ping` e `/api/version`.
+- [X] Executar `wails dev` para testar servidor+frontend integrado minimal. (Mas podemos separar: foco só no servidor Go, sem ainda empacotar no Wails).
 
 3. **Configurar Frontend React Master**
 

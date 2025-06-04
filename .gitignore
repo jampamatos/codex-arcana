@@ -1,0 +1,61 @@
+# ==== Go ====
+# Binários e diretórios de build
+/bin/
+/build/
+
+# Arquivos de executável e bibliotecas
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Cache e módulos
+/vendor/
+
+
+# ==== Wails ====
+# Dist do frontend gerado pelo Wails
+/frontend/dist/
+
+# Dependências do Node dentro do frontend
+/frontend/node_modules/
+
+# Cache de bundler/Vite
+/frontend/.vite/
+
+
+# ==== Node ====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# ==== Arquivos de ambiente ====
+.env
+.env.*
+
+
+# ==== Editor / sistema operacional ====
+.DS_Store
+*.swp
+*.swo
+
+
+# ==== Logs e cobertura de testes ====
+*.log
+coverage.out
+
+
+# ==== Outros ====
+# Arquivos temporários do Go
+*.tmp
+*.bak
+*.orig
+
+# Ignore IDEs/editoras comuns
+.idea/
+.vscode/
+.sass-cache/
+*.class
