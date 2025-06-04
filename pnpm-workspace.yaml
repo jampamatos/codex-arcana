@@ -1,8 +1,0 @@
-packages:
-  - app
-  - server
-  - ssg
-onlyBuiltDependencies:
-  - core-js
-  - core-js-pure
-  - electron-winstaller
