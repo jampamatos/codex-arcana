@@ -94,9 +94,13 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
 
 3. **Configurar Frontend React Master**
 
-- [ ] No diretório `/frontend/master/`, executar `npm create vite@latest . -- --template react-ts`.
-- [ ] Instalar dependências: `npm install`, `npm install -D tailwindcss postcss autoprefixer`.
+- [X] No diretório `/frontend/master/`, executar `npm create vite@latest . -- --template react-ts`.
+- [X] Instalar dependências: `npm install`, `npm install -D tailwindcss postcss autoprefixer`.
 - [ ] Executar `npx tailwindcss init -p`.
+  - Uma vez que esse comando não funcionou, criamos o arquivo `tailwind.config.js` manualmente.
+  - Criamos também o arquivo `postcss.config.js` manualmente.
+  - Editamos o `package.json` para incluir os scripts de build e dev do Tailwind.
+  - Resetamos o `index.css` para incluir as diretivas do Tailwind (`@tailwind base; @tailwind components; @tailwind utilities;`).
 - [ ] Configurar `tailwind.config.js`:
 ```javascript
 module.exports = {
@@ -113,7 +117,7 @@ module.exports = {
 ```
 - [ ] Em `App.tsx`, remover conteúdo de exemplo e exibir “Hello Codex Arcana” dentro de uma `<div className="p-4 text-2xl">`.
 
-4. **Ajustar CORS no Backend**
+1. **Ajustar CORS no Backend**
 
 - [ ] Instalar pacote de middleware CORS (por exemplo: `github.com/rs/cors`).
 - [ ] No `main.go`, antes de `http.ListenAndServe`, envolver o mux principal com o handler CORS:
