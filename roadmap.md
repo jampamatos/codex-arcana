@@ -97,11 +97,12 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
 - [X] No diretório `/frontend/master/`, executar `npm create vite@latest . -- --template react-ts`.
 - [X] Instalar dependências: `npm install`, `npm install -D tailwindcss postcss autoprefixer`.
 - [ ] Executar `npx tailwindcss init -p`.
-  - Uma vez que esse comando não funcionou, criamos o arquivo `tailwind.config.js` manualmente.
-  - Criamos também o arquivo `postcss.config.js` manualmente.
+  - Uma vez que esse comando não funcionou, criamos o arquivo `tailwind.config.cjs` manualmente.
+  - Criamos também o arquivo `postcss.config.cjs` manualmente.
   - Editamos o `package.json` para incluir os scripts de build e dev do Tailwind.
   - Resetamos o `index.css` para incluir as diretivas do Tailwind (`@tailwind base; @tailwind components; @tailwind utilities;`).
-- [ ] Configurar `tailwind.config.js`:
+  - O Tailwind parece não estar funcionando corretamente, então vamos investigar isso mais tarde. Os passos abaixo também foram feitos, mas o Tailwind não está aplicando os estilos como esperado.
+- [X] Configurar `tailwind.config.cjs`:
 ```javascript
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
@@ -109,13 +110,14 @@ module.exports = {
   plugins: [],
 };
 ```
-- [ ] No `src/index.css`, adicionar diretivas do Tailwind:
+- [X] No `src/index.css`, adicionar diretivas do Tailwind:
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
-- [ ] Em `App.tsx`, remover conteúdo de exemplo e exibir “Hello Codex Arcana” dentro de uma `<div className="p-4 text-2xl">`.
+  - Retiramos essas diretivas e aplicaremos CSS vanilla por enquanto, já que o Tailwind não está funcionando corretamente.
+- [X] Em `App.tsx`, remover conteúdo de exemplo e exibir “Hello Codex Arcana” dentro de uma `<div className="p-4 text-2xl">`.
 
 1. **Ajustar CORS no Backend**
 
@@ -136,7 +138,7 @@ log.Fatal(http.ListenAndServe(":3000", handler))
 - [ ] Exibir no console devtools ou dentro de um `<p>` o texto “pong”.
 
 6. **Commit & Push**
-- [ ] Criar branch `milestone1-skeleton` ou trabalhar diretamente em `main` se for conveniente.
+- [X] Criar branch `milestone1-skeleton` ou trabalhar diretamente em `main` se for conveniente.
 - [ ] Fazer commits granulares (um para o skeleton Go, outro para o React + Tailwind, outro para a integração fetch).
 - [ ] Push para o GitHub e abrir um PR (caso queira revisão automática).
 

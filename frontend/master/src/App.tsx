@@ -1,9 +1,9 @@
 function App () {
   return (
-    <div className="p-4 text-2xl">
+    <div className="centralized">
       Hello Codex Arcana!
     </div>
   )
 }
 
-export default App
+export default App;
