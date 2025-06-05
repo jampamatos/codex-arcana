@@ -33,6 +33,10 @@ func main() {
 			w.Write([]byte(`{"version": "0.1.0"}`))
 		})
 
+		// Campaign API routes
+		mux.HandleFunc("/api/campaigns", campaignsHandler)
+		mux.HandleFunc("/api/campaigns/", campaignHandler)
+
 		// Apply CORS middleware to the mux server
 		handler := cors.Default().Handler(mux)
 

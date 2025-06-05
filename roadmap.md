@@ -111,31 +111,32 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
   - [X] Criar função `func DeleteCampaign(id int) error` que faz `DELETE FROM campaigns WHERE id = ?`.
   - [X] Testar cada função isoladamente (por exemplo, criando um `main_test.go` ou fazendo log no console para verificar se as queries são executadas).
 
-1. **Endpoints REST Campaign (GET, POST, PUT, DELETE)**
+2. **Endpoints REST Campaign (GET, POST, PUT, DELETE)**
 
-- [ ] **Definir rotas no servidor Go**
-  - [ ] Escolher framework de roteamento (por exemplo, `net/http` + `gorilla/mux` ou `chi`).
-  - [ ] Registrar rota `GET /api/campaigns` → handler que chama `GetAllCampaigns()` e retorna JSON.
-  - [ ] Registrar rota `GET /api/campaigns/{id}` → handler que chama `GetCampaignByID(id)`.
-  - [ ] Registrar rota `POST /api/campaigns` → handler que faz “decoder” de JSON para struct `Campaign`, chama `CreateCampaign` e retorna JSON do campaign criado.
-  - [ ] Registrar rota `PUT /api/campaigns/{id}` → handler que decoda JSON, define campo ID pelo parâmetro de rota, chama `UpdateCampaign`.
-  - [ ] Registrar rota `DELETE /api/campaigns/{id}` → handler que chama `DeleteCampaign(id)`.
-- [ ] **Implementar handlers HTTP**
-  - [ ] Em cada handler, ler e validar os campos obrigatórios (por exemplo, `name` não pode estar vazio).
-  - [ ] Tratar erros de banco (se não encontrar ID, retornar 404; se falhar inserção, retornar 500).
-  - [ ] Definir respostas HTTP adequadas:
+- [X] **Definir rotas no servidor Go**
+  - [X] Escolher framework de roteamento (por exemplo, `net/http` + `gorilla/mux` ou `chi`).
+    - Estamos usando o `net/http` padrão do Go.
+  - [X] Registrar rota `GET /api/campaigns` → handler que chama `GetAllCampaigns()` e retorna JSON.
+  - [X] Registrar rota `GET /api/campaigns/{id}` → handler que chama `GetCampaignByID(id)`.
+  - [X] Registrar rota `POST /api/campaigns` → handler que faz “decoder” de JSON para struct `Campaign`, chama `CreateCampaign` e retorna JSON do campaign criado.
+  - [X] Registrar rota `PUT /api/campaigns/{id}` → handler que decoda JSON, define campo ID pelo parâmetro de rota, chama `UpdateCampaign`.
+  - [X] Registrar rota `DELETE /api/campaigns/{id}` → handler que chama `DeleteCampaign(id)`.
+- [X] **Implementar handlers HTTP**
+  - [X] Em cada handler, ler e validar os campos obrigatórios (por exemplo, `name` não pode estar vazio).
+  - [X] Tratar erros de banco (se não encontrar ID, retornar 404; se falhar inserção, retornar 500).
+  - [X] Definir respostas HTTP adequadas:
     - `GET /api/campaigns` → 200 com array JSON de campaigns.
     - `GET /api/campaigns/{id}` → 200 se encontrado, 404 se não encontrado.
     - `POST /api/campaigns` → 201 com JSON do campaign criado.
     - `PUT /api/campaigns/{id}` → 200 com JSON do campaign atualizado, 400 se payload inválido, 404 se não encontrar registro.
     - `DELETE /api/campaigns/{id}` → 204 sem corpo, 404 se não encontrado.
-- [ ] **Testar rotas via cURL ou Postman**
-  - [ ] Testar `curl -X GET http://localhost:3000/api/campaigns`
-  - [ ] Testar `curl -X POST http://localhost:3000/api/campaigns -d '{"name":"Campanha 1","description":"Descrição"}' -H "Content-Type: application/json"`
-  - [ ] Testar `curl -X GET http://localhost:3000/api/campaigns/1`
-  - [ ] Testar `curl -X PUT http://localhost:3000/api/campaigns/1 -d '{"name":"Novo Nome","description":"Nova descrição"}' -H "Content-Type: application/json"`
-  - [ ] Testar `curl -X DELETE http://localhost:3000/api/campaigns/1`
-  - [ ] Verificar códigos HTTP e payloads de resposta. Anotar qualquer bug ou comportamento inesperado (por exemplo, erro 500).
+- [X] **Testar rotas via cURL ou Postman**
+  - [X] Testar `curl -X GET http://localhost:3000/api/campaigns`
+  - [X] Testar `curl -X POST http://localhost:3000/api/campaigns -d '{"name":"Campanha 1","description":"Descrição"}' -H "Content-Type: application/json"`
+  - [X] Testar `curl -X GET http://localhost:3000/api/campaigns/1`
+  - [X] Testar `curl -X PUT http://localhost:3000/api/campaigns/1 -d '{"name":"Novo Nome","description":"Nova descrição"}' -H "Content-Type: application/json"`
+  - [X] Testar `curl -X DELETE http://localhost:3000/api/campaigns/1`
+  - [X] Verificar códigos HTTP e payloads de resposta. Anotar qualquer bug ou comportamento inesperado (por exemplo, erro 500).
 
 3. **Front React: CampaignList e CampaignForm (lista + criação/edição)**
 - [ ] **Definir rotas de navegação no React (React Router)**
@@ -170,7 +171,7 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
   - [ ] Clicar em “Editar” de uma campanha existente → formulário com dados carregados; alterar e salvar → listagem atualizada.
   - [ ] Clicar em “Excluir” de uma campanha → confirmação (opcional) e remoção do item na lista.
 
-4. **Modelagem SQLite para Session (vinculada à Campaign)**
+1. **Modelagem SQLite para Session (vinculada à Campaign)**
 - [ ] **Definir a struct Session no backend (Go)**
   - [ ] Estrutura básica: `type Session struct { ID int; CampaignID int; Title string; Date time.Time; Location string; Notes string; CreatedAt time.Time; UpdatedAt time.Time }`
   - [ ] Verificar quais campos são obrigatórios (no mínimo, `CampaignID` e `Title`).
