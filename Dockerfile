@@ -1,4 +1,5 @@
-FROM golang:1.24.3-alpine AS base
+# Use the official Golang image as base for building and running the app
+FROM golang:1.24.3-alpine
 
 # Install essential dependencies
 RUN apk add --no-cache git nodejs npm
@@ -7,8 +8,7 @@ RUN apk add --no-cache git nodejs npm
 RUN go install github.com/wailsapp/wails/v2/cmd/wails@latest
 
 # BACKEND INSIDE /go-back
-
-# Set the working directory for the backend
+# Set the working directory for the backend where Go code lives
 WORKDIR /go-back
 
 # Copy only files that define Go dependencies
@@ -20,11 +20,11 @@ RUN go mod download
 COPY backend/ ./
 
 # FRONTEND 
-# Copy frontend/master from host to /go-back/frontend
+# Copy React source into the expected Wails frontend directory
 COPY frontend/master ./frontend
 
-# Expose the ports Wails uses in dev mode: 3000 for Go backend and 8080 for Vite frontend
+# Expose the ports used during development: 3000 for the Go API and 8080 for the Vite dev server
 EXPOSE 3000 8080
 
-# When container builds, run Wails in dev mode
+# Default command launches the development server
 CMD ["wails", "dev"]

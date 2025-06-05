@@ -5,16 +5,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      # Mount all app directory inside /app in the container
-    volumes: 
-      - ./:/app
-      # Ensure Go cache is persistent
+    # Mount the repository in the same path used inside the Dockerfile
+    volumes:
+      - ./:/go-back
+      # Persist Go module cache across runs
       - go-mod-cache:/go/pkg/mod
-    # Expose same ports as in Dockerfile
+    working_dir: /go-back
+    # Expose the same ports as defined in the Dockerfile
     ports:
       - "3000:3000"   # Backend (Go/Wails)
-      - "8080:8080"   # Frontend (Wails server)
-    # Define standard command
+      - "8080:8080"   # Frontend (Vite)
+    # Default command starts the development server
     command: ["wails", "dev"]
 
 # Define named volume for Go module cache
