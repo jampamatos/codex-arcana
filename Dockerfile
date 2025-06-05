@@ -1,8 +1,20 @@
 # Use the official Golang image as base for building and running the app
-FROM golang:1.24.3-alpine
+FROM golang:1.24.3-bullseye
 
 # Install essential dependencies
-RUN apk add --no-cache git nodejs npm gcc musl-dev
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y --no-install-recommends \
+        git \
+        nodejs \
+        build-essential \
+        pkg-config \
+        libgtk-3-dev \
+        libwebkit2gtk-4.0-dev \
+        libglib2.0-dev \
+        libgdk-pixbuf2.0-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Wails CLI globally
 RUN go install github.com/wailsapp/wails/v2/cmd/wails@latest
@@ -30,4 +42,5 @@ COPY frontend/master ./frontend
 EXPOSE 3000 5173 34115
 
 # Default command launches the development server
+#  Vite will be started with --host so the dev server is reachable outside the container
 CMD ["wails", "dev"]

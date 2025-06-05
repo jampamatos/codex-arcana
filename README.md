@@ -56,4 +56,39 @@ cd ../frontend/master
 npm run build
 ```
 
+## Rodando via Docker com interface gráfica (Linux/X11)
+
+Se quiser rodar o Codex Arcana em um container Docker **com interface gráfica (Wails/GTK)**, é necessário compartilhar o servidor X11 do seu host Linux com o container.  
+**Atenção:** Isso só funciona em ambientes Linux com X11.
+
+### Passos:
+
+1. **Permita conexões X11 do Docker no host:**
+
+   ```sh
+   xhost +local:docker
+   ```
+
+2. **Suba o container normalmente:**
+
+   ```sh
+   docker compose up --build
+   ```
+
+   O app Wails abrirá a janela gráfica no seu desktop.
+
+3. **(Opcional) Para revogar a permissão depois:**
+
+   ```sh
+   xhost -local:docker
+   ```
+
+### Observações
+
+- Esse método exige configuração local e só funciona em Linux/X11.
+- Para produção, distribua o binário gerado pelo Wails, não o container.
+- Em outros sistemas operacionais (Windows, Mac, Wayland), o suporte a GUI via Docker é diferente e pode exigir soluções alternativas (VNC, Xpra, etc).
+
+---
+
 Para mais detalhes e próximas etapas consulte [`roadmap.md`](roadmap.md).

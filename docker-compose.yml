@@ -4,11 +4,13 @@ services:
       context: .
       dockerfile: Dockerfile
     # Mount backend and frontend repositories in the same path used inside the Dockerfile
+    environment:
+      - DISPLAY=${DISPLAY} # Pass through the display variable for GUI apps
     volumes:
       - ./backend:/go-back
-      - ./frontend/master:/go-back/frontend
-      # Persist Go module cache across runs
+      - ./frontend/master:/go-back/frontend # Persist Go module cache across runs
       - go-mod-cache:/go/pkg/mod
+      - /tmp/.X11-unix:/tmp/.X11-unix       # For GUI apps to access X11
     working_dir: /go-back
     # Expose the same ports as defined in the Dockerfile
     ports:
