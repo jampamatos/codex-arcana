@@ -1,54 +1,59 @@
 # Codex Arcana
-Codex Arcana é um app desktop offline-first para Mestres de RPG (D&$D 5e no MVP), que combina editor de campanha, ferramentas in-session e DM screen interativa com widgets arrastáveis.
 
-Esse aplicativo é um monorepo para aplicação desktop, API e documentação estática.
+Codex Arcana é um app desktop offline-first para Mestres de RPG (D&D 5e no MVP), combinando editor de campanha, ferramentas in-session e uma DM Screen interativa com widgets arrastáveis.
+
+Este repositório é um monorepo contendo o backend em Go/Wails e o frontend em React. Consulte o arquivo [`roadmap.md`](roadmap.md) para o planejamento detalhado e próximos passos.
 
 ## Arquitetura
 
-- **app/**: Electron + React + SQLite + isomorphic-git  
-- **server/**: Express + Prisma + SQLite  
-- **ssg/**: Docusaurus (TypeScript)
+- `backend/` – Projeto [Wails](https://wails.io/) em Go. Expõe endpoints HTTP (como `/ping` e `/api/version`) e empacota a aplicação desktop.
+- `frontend/master/` – Aplicação React + Vite + Tailwind que consome esses endpoints. Servirá como interface do mestre.
+
+Outros módulos (wiki estática, PWA para jogadores, etc.) serão adicionados conforme o roadmap.
+
+## Status atual
+
+O milestone inicial está completo:
+
+- Skeleton do backend em Go criado com Wails.
+- Endpoints `/ping` e `/api/version` disponíveis e com CORS habilitado.
+- Frontend React configurado e integrado, exibindo a versão obtida do backend.
 
 ## Pré-requisitos
 
-- Node.js ≥18  
-- pnpm  
-- Git
+- Node.js ≥18
+- Go ≥1.23
+- npm ou pnpm
+- Wails CLI (`go install github.com/wailsapp/wails/v2/cmd/wails@latest`)
 
-## Instalação
+## Como rodar
 
 ```bash
 git clone <URL>
 cd codex-arcana
-pnpm install
-```
 
-## Desenvolvimento
+# Backend
+cd backend
+wails dev
+# escuta em http://localhost:3000
 
-Em terminais separados:
-
-```bash
-# UI React
-pnpm --filter app ui
-
-# Electron (desktop)
-pnpm --filter app dev
-
-# API (server)
-pnpm --filter server dev
-
-# Docs (Docusaurus)
-pnpm --filter ssg start
+# Frontend (novo terminal)
+cd ../frontend/master
+npm install
+npm run dev
 ```
 
 ## Build
 
+Para gerar o binário desktop e a build do frontend:
+
 ```bash
-pnpm --filter app build
-pnpm --filter server build
-pnpm --filter ssg build
+cd backend
+wails build
+# executáveis em backend/build/bin
+
+cd ../frontend/master
+npm run build
 ```
 
-## CI
-
-Pipeline configurado em `.github/workflows/ci.yml` para lint, testes e build.
+Para mais detalhes e próximas etapas consulte [`roadmap.md`](roadmap.md).
