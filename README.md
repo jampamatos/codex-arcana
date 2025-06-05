@@ -6,18 +6,26 @@ Este repositório é um monorepo contendo o backend em Go/Wails e o frontend em 
 
 ## Arquitetura
 
-- `backend/` – Projeto [Wails](https://wails.io/) em Go. Expõe endpoints HTTP (como `/ping` e `/api/version`) e empacota a aplicação desktop.
+- `backend/` – Projeto [Wails](https://wails.io/) em Go. Além dos endpoints básicos (`/ping` e `/api/version`), agora inicializa um banco SQLite (`campaign.db`) e expõe a API REST de Campaign.
 - `frontend/master/` – Aplicação React + Vite + Tailwind que consome esses endpoints. Servirá como interface do mestre.
 
 Outros módulos (wiki estática, PWA para jogadores, etc.) serão adicionados conforme o roadmap.
 
 ## Status atual
 
-O milestone inicial está completo:
+O milestone inicial foi concluído e novas funcionalidades já foram adicionadas:
 
 - Skeleton do backend em Go criado com Wails.
 - Endpoints `/ping` e `/api/version` disponíveis e com CORS habilitado.
+- **Persistência em SQLite** via arquivo `campaign.db`, com modelo `Campaign` e funções CRUD (`CreateCampaign`, `GetAllCampaigns`, `GetCampaignByID`, `UpdateCampaign`, `DeleteCampaign`).
+- **API REST de Campaign** com rotas:
+  - `GET /api/campaigns` – lista todas as campanhas
+  - `GET /api/campaigns/{id}` – retorna uma campanha específica
+  - `POST /api/campaigns` – cria nova campanha
+  - `PUT /api/campaigns/{id}` – atualiza campanha
+  - `DELETE /api/campaigns/{id}` – remove campanha
 - Frontend React configurado e integrado, exibindo a versão obtida do backend.
+- Testes básicos do DAO podem ser executados com `go test ./...` dentro de `backend/`.
 
 ## Pré-requisitos
 
