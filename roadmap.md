@@ -81,15 +81,16 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
 
 1. **Modelagem SQLite para Campaign**
 
-- [ ] **Definir a struct Campaign no backend (Go)**
-  - [ ] Escolher nome da struct: `type Campaign struct { ID int; Name string; Description string; CreatedAt time.Time; UpdatedAt time.Time }`
-  - [ ] Incluir campos obrigatórios (ID autoincremental, nome, descrição, timestamps).
+- [X] **Definir a struct Campaign no backend (Go)**
+  - [X] Escolher nome da struct: `type Campaign struct { ID int; Name string; Description string; CreatedAt time.Time; UpdatedAt time.Time }`
+  - [X] Incluir campos obrigatórios (ID autoincremental, nome, descrição, timestamps).
   - [ ] Avaliar metadados adicionais que possam ser necessários (por exemplo, “Owner” ou “Status” se quisermos expandir depois).
-- [ ] **Configurar conexão com SQLite**
-  - [ ] Verificar se já existe uma função ou pacote para inicializar o banco (ex.: `db, err := sql.Open("sqlite3", "./campaign.db")`).
-  - [ ] Garantir que, no momento de startup do servidor Go, a conexão seja aberta e armazenada numa variável global ou num objeto de “service”.
-- [ ] **Criar a tabela campaigns no banco SQLite**
-  - [ ] Escrever comando SQL para criar a tabela, por exemplo:
+- [X] **Configurar conexão com SQLite**
+  - [X] Verificar se já existe uma função ou pacote para inicializar o banco (ex.: `db, err := sql.Open("sqlite3", "./campaign.db")`).
+  - [X] Garantir que, no momento de startup do servidor Go, a conexão seja aberta e armazenada numa variável global ou num objeto de “service”.
+    - `var DB *sql.DB` em `database.go`.
+- [X] **Criar a tabela campaigns no banco SQLite**
+  - [X] Escrever comando SQL para criar a tabela, por exemplo:
   
   ```sql
   CREATE TABLE IF NOT EXISTS campaigns (
@@ -100,17 +101,17 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
   updated_at DATETIME NOT NULL
   );
   ```
-  - [ ] Adicionar função de “migrations” ou “initDB()” que execute esse `CREATE TABLE` no momento de inicializar o servidor.
-  - [ ] Testar manualmente: ao iniciar o servidor, conferir se o arquivo `.db` é criado e se a tabela `campaigns` existe (usar DB Browser for SQLite ou CLI).
-- [ ] **Implementar métodos de acesso ao banco (Data Access Layer)**
-  - [ ] Criar função `func CreateCampaign(c Campaign) (Campaign, error)` que insere no SQLite e retorna o registro criado com ID.
-  - [ ] Criar função `func GetAllCampaigns() ([]Campaign, error)` que faz `SELECT * FROM campaigns`.
-  - [ ] Criar função `func GetCampaignByID(id int) (Campaign, error)` que faz `SELECT * FROM campaigns WHERE id = ?`.
-  - [ ] Criar função `func UpdateCampaign(c Campaign) error` que faz `UPDATE campaigns SET name = ?, description = ?, updated_at = ? WHERE id = ?`.
-  - [ ] Criar função `func DeleteCampaign(id int) error` que faz `DELETE FROM campaigns WHERE id = ?`.
-  - [ ] Testar cada função isoladamente (por exemplo, criando um `main_test.go` ou fazendo log no console para verificar se as queries são executadas).
+  - [X] Adicionar função de “migrations” ou “initDB()” que execute esse `CREATE TABLE` no momento de inicializar o servidor.
+  - [X] Testar manualmente: ao iniciar o servidor, conferir se o arquivo `.db` é criado e se a tabela `campaigns` existe (usar DB Browser for SQLite ou CLI).
+- [X] **Implementar métodos de acesso ao banco (Data Access Layer)**
+  - [X] Criar função `func CreateCampaign(c Campaign) (Campaign, error)` que insere no SQLite e retorna o registro criado com ID.
+  - [X] Criar função `func GetAllCampaigns() ([]Campaign, error)` que faz `SELECT * FROM campaigns`.
+  - [X] Criar função `func GetCampaignByID(id int) (Campaign, error)` que faz `SELECT * FROM campaigns WHERE id = ?`.
+  - [X] Criar função `func UpdateCampaign(c Campaign) error` que faz `UPDATE campaigns SET name = ?, description = ?, updated_at = ? WHERE id = ?`.
+  - [X] Criar função `func DeleteCampaign(id int) error` que faz `DELETE FROM campaigns WHERE id = ?`.
+  - [X] Testar cada função isoladamente (por exemplo, criando um `main_test.go` ou fazendo log no console para verificar se as queries são executadas).
 
-2. **Endpoints REST Campaign (GET, POST, PUT, DELETE)**
+1. **Endpoints REST Campaign (GET, POST, PUT, DELETE)**
 
 - [ ] **Definir rotas no servidor Go**
   - [ ] Escolher framework de roteamento (por exemplo, `net/http` + `gorilla/mux` ou `chi`).

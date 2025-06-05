@@ -40,6 +40,10 @@ func main() {
 		http.ListenAndServe(":3000", handler)
 	}()
 
+	// Initialize the database
+	initDB()
+	defer DB.Close() // Ensure the database connection is closed when the application exits
+
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "backend",
