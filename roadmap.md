@@ -137,6 +137,7 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
   - [X] Testar `curl -X PUT http://localhost:3000/api/campaigns/1 -d '{"name":"Novo Nome","description":"Nova descrição"}' -H "Content-Type: application/json"`
   - [X] Testar `curl -X DELETE http://localhost:3000/api/campaigns/1`
   - [X] Verificar códigos HTTP e payloads de resposta. Anotar qualquer bug ou comportamento inesperado (por exemplo, erro 500).
+    - Tudo testado via Postman, retornando os códigos corretos e payloads esperados.
 
 3. **Front React: CampaignList e CampaignForm (lista + criação/edição)**
 - [ ] **Definir rotas de navegação no React (React Router)**
