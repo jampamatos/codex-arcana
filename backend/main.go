@@ -4,6 +4,7 @@ import (
 	"embed"
 	"net/http"
 
+	"github.com/rs/cors"
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
@@ -18,19 +19,25 @@ func main() {
 
 	// Initialize a simple HTTP servcer for /ping and /api/version in goroutine
 	go func() {
-		// Return 'pong' for /ping endpoint
-		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+		// Create new Mux router
+		mux := http.NewServeMux()
+
+		// Handle /ping endpoint, to return a simple "pong" response
+		mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
 			w.Write([]byte("pong"))
 		})
 
-		// Return {"version": "0.1.0"} for /api/version endpoint
-		http.HandleFunc("/api/version", func(w http.ResponseWriter, r *http.Request) {
+		// Handle /api/version endpoint, to return a simple JSON response
+		mux.HandleFunc("/api/version", func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-Type", "application/json")
 			w.Write([]byte(`{"version": "0.1.0"}`))
 		})
 
-		// Start the HTTP server on port 3000
-		http.ListenAndServe(":3000", nil)
+		// Apply CORS middleware to the mux server
+		handler := cors.Default().Handler(mux)
+
+		// Start the HTTP server on port 3000 with CORS enabled
+		http.ListenAndServe(":3000", handler)
 	}()
 
 	// Create application with options

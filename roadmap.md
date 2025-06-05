@@ -96,12 +96,13 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
 
 - [X] No diretório `/frontend/master/`, executar `npm create vite@latest . -- --template react-ts`.
 - [X] Instalar dependências: `npm install`, `npm install -D tailwindcss postcss autoprefixer`.
-- [ ] Executar `npx tailwindcss init -p`.
+- [X] Executar `npx tailwindcss init -p`.
   - Uma vez que esse comando não funcionou, criamos o arquivo `tailwind.config.cjs` manualmente.
   - Criamos também o arquivo `postcss.config.cjs` manualmente.
   - Editamos o `package.json` para incluir os scripts de build e dev do Tailwind.
   - Resetamos o `index.css` para incluir as diretivas do Tailwind (`@tailwind base; @tailwind components; @tailwind utilities;`).
   - O Tailwind parece não estar funcionando corretamente, então vamos investigar isso mais tarde. Os passos abaixo também foram feitos, mas o Tailwind não está aplicando os estilos como esperado.
+  - Descobri que para a v3 e a v$ do Tailwind, têm instalações diferentes. Usei o comando `npm install -D tailwindcss@3` e o Tailwind começou a funcionar corretamente.
 - [X] Configurar `tailwind.config.cjs`:
 ```javascript
 module.exports = {
@@ -117,12 +118,15 @@ module.exports = {
 @tailwind utilities;
 ```
   - Retiramos essas diretivas e aplicaremos CSS vanilla por enquanto, já que o Tailwind não está funcionando corretamente.
+  - Retornamos as diretivas de volta após descobrir que o Tailwind estava funcionando corretamente.
 - [X] Em `App.tsx`, remover conteúdo de exemplo e exibir “Hello Codex Arcana” dentro de uma `<div className="p-4 text-2xl">`.
 
-1. **Ajustar CORS no Backend**
+4. **Ajustar CORS no Backend**
 
-- [ ] Instalar pacote de middleware CORS (por exemplo: `github.com/rs/cors`).
-- [ ] No `main.go`, antes de `http.ListenAndServe`, envolver o mux principal com o handler CORS:
+- [X] Instalar pacote de middleware CORS (por exemplo: `github.com/rs/cors`).
+  - Para referência, CORS é um middleware que permite que o servidor Go aceite requisições de origens diferentes (como portas diferentes para servidores de front e back end).
+  - Middleware, por outro lado, são intermediários que processam requisições HTTP antes de chegarem ao handler final.
+- [X] No `main.go`, antes de `http.ListenAndServe`, envolver o mux principal com o handler CORS:
 ```go
 mux := http.NewServeMux()
 mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
@@ -134,12 +138,12 @@ log.Fatal(http.ListenAndServe(":3000", handler))
 - [ ] Testar localmente: `curl localhost:3000/ping`.
 
 5. **Conectar Frontend ao Backend**
-- [ ] Em `App.tsx`, usar `useEffect(() => { fetch("http://localhost:3000/ping").then(...) }, [])`.
-- [ ] Exibir no console devtools ou dentro de um `<p>` o texto “pong”.
+- [X] Em `App.tsx`, usar `useEffect(() => { fetch("http://localhost:3000/ping").then(...) }, [])`.
+- [X] Exibir no console devtools ou dentro de um `<p>` o texto “pong”.
 
 6. **Commit & Push**
 - [X] Criar branch `milestone1-skeleton` ou trabalhar diretamente em `main` se for conveniente.
-- [ ] Fazer commits granulares (um para o skeleton Go, outro para o React + Tailwind, outro para a integração fetch).
-- [ ] Push para o GitHub e abrir um PR (caso queira revisão automática).
+- [X] Fazer commits granulares (um para o skeleton Go, outro para o React + Tailwind, outro para a integração fetch).
+- [X] Push para o GitHub e abrir um PR (caso queira revisão automática).
 
 
