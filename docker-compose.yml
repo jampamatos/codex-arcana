@@ -1,20 +1,20 @@
-version: '3.8'
-
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    # Mount the repository in the same path used inside the Dockerfile
+    # Mount backend and frontend repositories in the same path used inside the Dockerfile
     volumes:
-      - ./:/go-back
+      - ./backend:/go-back
+      - ./frontend/master:/go-back/frontend
       # Persist Go module cache across runs
       - go-mod-cache:/go/pkg/mod
     working_dir: /go-back
     # Expose the same ports as defined in the Dockerfile
     ports:
       - "3000:3000"   # Backend (Go/Wails)
-      - "8080:8080"   # Frontend (Vite)
+      - "5173:5173"   # Frontend (Vite DevServer)
+      - "34115:34115" # Wails DevWatcher
     # Default command starts the development server
     command: ["wails", "dev"]
 

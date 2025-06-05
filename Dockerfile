@@ -2,7 +2,7 @@
 FROM golang:1.24.3-alpine
 
 # Install essential dependencies
-RUN apk add --no-cache git nodejs npm
+RUN apk add --no-cache git nodejs npm gcc musl-dev
 
 # Install Wails CLI globally
 RUN go install github.com/wailsapp/wails/v2/cmd/wails@latest
@@ -23,8 +23,11 @@ COPY backend/ ./
 # Copy React source into the expected Wails frontend directory
 COPY frontend/master ./frontend
 
-# Expose the ports used during development: 3000 for the Go API and 8080 for the Vite dev server
-EXPOSE 3000 8080
+# Expose the ports used during development:
+    # 3000: backend Go
+    # 5173: Vite (frontend dev server)
+    # 34115: Wails DevWatcher
+EXPOSE 3000 5173 34115
 
 # Default command launches the development server
 CMD ["wails", "dev"]
