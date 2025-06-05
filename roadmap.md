@@ -8,142 +8,342 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
 
     * **Objetivo**: Ter o esqueleto do aplicativo funcionando localmente (front + back).
     * **User Stories**:
-        1.1. Configurar Repositório Git
-        1.2. Inicializar Projeto Go + Wails
-        1.3. Criar Frontend React + Tailwind Básico
-        1.4. Estabelecer Estrutura de Pastas
-        1.5. Servidor Go responde /ping e /api/version
-        1.6. Build Local (Wails) e Execução mínima
+      <s>*  1.1. Configurar Repositório Git
+      *  1.2. Inicializar Projeto Go + Wails
+      *  1.3. Criar Frontend React + Tailwind Básico
+      *  1.4. Estabelecer Estrutura de Pastas
+      *  1.5. Servidor Go responde /ping e /api/version
+      *  1.6. Build Local (Wails) e Execução mínima</s>
+      *  *Epic 1 já foi concluído, conforme o milestone atual.*
 
 2. **Epic 2: Módulo “Campaigns & Sessions”**
     * **Objetivo**: Permitir CRUD de “Campaigns” e “Sessions” via API e front React.
     * **User Stories**:
         2.1. Modelagem SQLite para Campaign
-        2.2. Endpoints REST Campaign (GET, POST, PUT, DELETE)
-        2.3. Front React: CampaignList e CampaignForm (lista + criação/edição)
-        2.4. Modelagem SQLite para Session (vinculada à Campaign)
-        2.5. Endpoints REST Session
-        2.6. Front React: SessionList e SessionForm
+       * 2.2. Endpoints REST Campaign (GET, POST, PUT, DELETE)
+       * 2.3. Front React: CampaignList e CampaignForm (lista + criação/edição)
+       * 2.4. Modelagem SQLite para Session (vinculada à Campaign)
+       * 2.5. Endpoints REST Session
+       * 2.6. Front React: SessionList e SessionForm
 3. **Epic 3: Lore-Keeping Básico (Markdown Editor + SSG)**
     * **Objetivo**: Permitir criar e editar páginas Markdown, gerar HTML local e exibir preview.
     * **User Stories**:
-        3.1. Backend: Listar arquivos Markdown em /content/
-        3.2. Backend: Salvar/Editar arquivo .md com frontmatter
-        3.3. Frontend: LoreList com todas páginas e botão “Criar Nova”
-        3.4. Frontend: LoreEditor (textarea + preview instantâneo via Goldmark no client)
-        3.5. Função Go para converter Markdown → HTML (pasta /public/)
-        3.6. Pipeline de Publicação: botão “Publicar Wiki” → git checkout gh-pages, sobrescrever /public, commit/push
+        * 3.1. Backend: Listar arquivos Markdown em /content/
+        * 3.2. Backend: Salvar/Editar arquivo .md com frontmatter
+        * 3.3. Frontend: LoreList com todas páginas e botão “Criar Nova”
+        * 3.4. Frontend: LoreEditor (textarea + preview instantâneo via Goldmark no client)
+        * 3.5. Função Go para converter Markdown → HTML (pasta /public/)
+        * 3.6. Pipeline de Publicação: botão “Publicar Wiki” → git checkout gh-pages, sobrescrever /public, commit/push
 4. **Epic 4: Autenticação & Conexão Mestre–Jogador**
     * **Objetivo**: Permitir que o Mestre inicie o servidor, descubra via mDNS ou inicie túnel ngrok, e que o Jogador se conecte.
     * **User Stories**:
-        4.1. Implementar mDNS (announceService e discoverMasters)
-        4.2. Configurar Tela de Settings: campo para Ngrok Token
-        4.3. Lógica Go para executar ngrok http 3000 e capturar URL
-        4.4. Endpoints Go: /ping (valida token) e /ws (aceita WS)
-        4.5. Front React Mestre: botão “Iniciar Túnel Ngrok” e exibir URL
-        4.6. Front React Jogador: DiscoverPanel (mostra hosts LAN) e input de URL ngrok
-        4.7. Fluxo de Autenticação (JWT ou token simples)
+        * 4.1. Implementar mDNS (announceService e discoverMasters)
+        * 4.2. Configurar Tela de Settings: campo para Ngrok Token
+        * 4.3. Lógica Go para executar ngrok http 3000 e capturar URL
+        * 4.4. Endpoints Go: /ping (valida token) e /ws (aceita WS)
+        * 4.5. Front React Mestre: botão “Iniciar Túnel Ngrok” e exibir URL
+        * 4.6. Front React Jogador: DiscoverPanel (mostra hosts LAN) e input de URL ngrok
+        * 4.7. Fluxo de Autenticação (JWT ou token simples)
 5. **Epic 5: Módulo “Character Sheets” (D&D 5e)**
     * **Objetivo**: CRUD de fichas de personagem e exportação básica.
     * **User Stories**:
-        5.1. Modelagem SQLite para Character (dados D&D 5e típicos)
-        5.2. Endpoints REST Character
-        5.3. Front React: CharacterList e CharacterForm (dynamic fields)
-        5.4. Exportar PDF → Integração com gofpdf (exemplo: gera PDF simples)
-        5.5. Exportar Markdown → Gera arquivo .md
+        * 5.1. Modelagem SQLite para Character (dados D&D 5e típicos)
+        * 5.2. Endpoints REST Character
+        * 5.3. Front React: CharacterList e CharacterForm (dynamic fields)
+        * 5.4. Exportar PDF → Integração com gofpdf (exemplo: gera PDF simples)
+        * 5.5. Exportar Markdown → Gera arquivo .md
 6. **Epic 6: Ferramentas In-Session & DM Screen (Widget Canvas)**
     * **Objetivo**: Implementar o rolador de dados, tracker de iniciativa, PV/condições e widgets básicos no DM Screen.
     * **User Stories**:
-        6.1. Rolador de Dados Go (função para parsear “1d20+5”)
-        6.2. Endpoint Go: /api/roll que retorna resultado JSON
-        6.3. Front React: componente RollButton que chama /api/roll e exibe resultado
-        6.4. Tracker de Iniciativa: backend gera lista ordenada e envia via WS
-        6.5. Front React DM Screen: lista de turno reordenável
-        6.6. Widget PV/Condições: componente que envia via WS update de PV
-        6.7. Implementar Canvas Drag & Drop com biblioteca leve (ex.: react-dnd ou react-canvas)
-        6.8. Criar widgets básicos (Contador, Nota, Timer, Player de Música)
+        * 6.1. Rolador de Dados Go (função para parsear “1d20+5”)
+        * 6.2. Endpoint Go: /api/roll que retorna resultado JSON
+        * 6.3. Front React: componente RollButton que chama /api/roll e exibe resultado
+        * 6.4. Tracker de Iniciativa: backend gera lista ordenada e envia via WS
+        * 6.5. Front React DM Screen: lista de turno reordenável
+        * 6.6. Widget PV/Condições: componente que envia via WS update de PV
+        * 6.7. Implementar Canvas Drag & Drop com biblioteca leve (ex.: react-dnd ou react-canvas)
+        * 6.8. Criar widgets básicos (Contador, Nota, Timer, Player de Música)
 7. **Epic 7: Frontend Jogador (PWA Offline-First)**
     * **Objetivo**: Permitir ao Jogador usar o PWA para ver ficha, notificações e lore pública offline.
     * **User Stories**:
-        7.1. Criar Pasta /frontend/jogador e segmentar componentes
-        7.2. Configurar manifest.json e service-worker.js para cache básico
-        7.3. Componente PlayerSheet (só leitura)
-        7.4. Componente RollButtons (mesmo rolador, mas restrito)
-        7.5. Componente Notifications (escuta WS e exibe alertas)
-        7.6. Integrar iframe ou link para wiki público estático
+        * 7.1. Criar Pasta /frontend/jogador e segmentar componentes
+        * 7.2. Configurar manifest.json e service-worker.js para cache básico
+        * 7.3. Componente PlayerSheet (só leitura)
+        * 7.4. Componente RollButtons (mesmo rolador, mas restrito)
+        * 7.5. Componente Notifications (escuta WS e exibe alertas)
+        * 7.6. Integrar iframe ou link para wiki público estático
 
 ---
 
-## Milestone Atual
+## Milestone Atual: Módulo “Campaigns & Sessions”
 
-1. **Criar e Configurar Repositório GitHub**
+**Objetivo**: Permitir CRUD de “Campaigns” e “Sessions” via API em Go com SQLite e interfaces React para listagem, criação, edição e remoção.
 
-- [X] Criar repositório público ou privado (a sua escolha).
-- [X] Adicionar .gitignore para Go, Node, Wails.
-- [X] Criar README.md inicial com instruções de setup.
+1. **Modelagem SQLite para Campaign**
 
-2. **Configurar Skeleton Go + Wails**
+- [ ] **Definir a struct Campaign no backend (Go)**
+  - [ ] Escolher nome da struct: `type Campaign struct { ID int; Name string; Description string; CreatedAt time.Time; UpdatedAt time.Time }`
+  - [ ] Incluir campos obrigatórios (ID autoincremental, nome, descrição, timestamps).
+  - [ ] Avaliar metadados adicionais que possam ser necessários (por exemplo, “Owner” ou “Status” se quisermos expandir depois).
+- [ ] **Configurar conexão com SQLite**
+  - [ ] Verificar se já existe uma função ou pacote para inicializar o banco (ex.: `db, err := sql.Open("sqlite3", "./campaign.db")`).
+  - [ ] Garantir que, no momento de startup do servidor Go, a conexão seja aberta e armazenada numa variável global ou num objeto de “service”.
+- [ ] **Criar a tabela campaigns no banco SQLite**
+  - [ ] Escrever comando SQL para criar a tabela, por exemplo:
+  
+  ```sql
+  CREATE TABLE IF NOT EXISTS campaigns (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  description TEXT,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
+  );
+  ```
+  - [ ] Adicionar função de “migrations” ou “initDB()” que execute esse `CREATE TABLE` no momento de inicializar o servidor.
+  - [ ] Testar manualmente: ao iniciar o servidor, conferir se o arquivo `.db` é criado e se a tabela `campaigns` existe (usar DB Browser for SQLite ou CLI).
+- [ ] **Implementar métodos de acesso ao banco (Data Access Layer)**
+  - [ ] Criar função `func CreateCampaign(c Campaign) (Campaign, error)` que insere no SQLite e retorna o registro criado com ID.
+  - [ ] Criar função `func GetAllCampaigns() ([]Campaign, error)` que faz `SELECT * FROM campaigns`.
+  - [ ] Criar função `func GetCampaignByID(id int) (Campaign, error)` que faz `SELECT * FROM campaigns WHERE id = ?`.
+  - [ ] Criar função `func UpdateCampaign(c Campaign) error` que faz `UPDATE campaigns SET name = ?, description = ?, updated_at = ? WHERE id = ?`.
+  - [ ] Criar função `func DeleteCampaign(id int) error` que faz `DELETE FROM campaigns WHERE id = ?`.
+  - [ ] Testar cada função isoladamente (por exemplo, criando um `main_test.go` ou fazendo log no console para verificar se as queries são executadas).
 
-- [X] Instalar Go (se ainda não tiver).
-- [X] Instalar Wails localmente (go install github.com/wailsapp/wails/v2/cmd/wails@latest).
-- [X] No diretório raiz, executar `wails init -n backend -t standard` (ou copiar template padrão). 
-  - Na verdade, o comando foi `wails init -n backend -t vanilla`, porque o template `standard` não estava disponível.
-- [X] Ajustar `go.mod` para `module codex-arcana/backend`.
-- [X] Em `main.go`, criar handler para `/ping` e `/api/version`.
-- [X] Executar `wails dev` para testar servidor+frontend integrado minimal. (Mas podemos separar: foco só no servidor Go, sem ainda empacotar no Wails).
+2. **Endpoints REST Campaign (GET, POST, PUT, DELETE)**
 
-3. **Configurar Frontend React Master**
+- [ ] **Definir rotas no servidor Go**
+  - [ ] Escolher framework de roteamento (por exemplo, `net/http` + `gorilla/mux` ou `chi`).
+  - [ ] Registrar rota `GET /api/campaigns` → handler que chama `GetAllCampaigns()` e retorna JSON.
+  - [ ] Registrar rota `GET /api/campaigns/{id}` → handler que chama `GetCampaignByID(id)`.
+  - [ ] Registrar rota `POST /api/campaigns` → handler que faz “decoder” de JSON para struct `Campaign`, chama `CreateCampaign` e retorna JSON do campaign criado.
+  - [ ] Registrar rota `PUT /api/campaigns/{id}` → handler que decoda JSON, define campo ID pelo parâmetro de rota, chama `UpdateCampaign`.
+  - [ ] Registrar rota `DELETE /api/campaigns/{id}` → handler que chama `DeleteCampaign(id)`.
+- [ ] **Implementar handlers HTTP**
+  - [ ] Em cada handler, ler e validar os campos obrigatórios (por exemplo, `name` não pode estar vazio).
+  - [ ] Tratar erros de banco (se não encontrar ID, retornar 404; se falhar inserção, retornar 500).
+  - [ ] Definir respostas HTTP adequadas:
+    - `GET /api/campaigns` → 200 com array JSON de campaigns.
+    - `GET /api/campaigns/{id}` → 200 se encontrado, 404 se não encontrado.
+    - `POST /api/campaigns` → 201 com JSON do campaign criado.
+    - `PUT /api/campaigns/{id}` → 200 com JSON do campaign atualizado, 400 se payload inválido, 404 se não encontrar registro.
+    - `DELETE /api/campaigns/{id}` → 204 sem corpo, 404 se não encontrado.
+- [ ] **Testar rotas via cURL ou Postman**
+  - [ ] Testar `curl -X GET http://localhost:3000/api/campaigns`
+  - [ ] Testar `curl -X POST http://localhost:3000/api/campaigns -d '{"name":"Campanha 1","description":"Descrição"}' -H "Content-Type: application/json"`
+  - [ ] Testar `curl -X GET http://localhost:3000/api/campaigns/1`
+  - [ ] Testar `curl -X PUT http://localhost:3000/api/campaigns/1 -d '{"name":"Novo Nome","description":"Nova descrição"}' -H "Content-Type: application/json"`
+  - [ ] Testar `curl -X DELETE http://localhost:3000/api/campaigns/1`
+  - [ ] Verificar códigos HTTP e payloads de resposta. Anotar qualquer bug ou comportamento inesperado (por exemplo, erro 500).
 
-- [X] No diretório `/frontend/master/`, executar `npm create vite@latest . -- --template react-ts`.
-- [X] Instalar dependências: `npm install`, `npm install -D tailwindcss postcss autoprefixer`.
-- [X] Executar `npx tailwindcss init -p`.
-  - Uma vez que esse comando não funcionou, criamos o arquivo `tailwind.config.cjs` manualmente.
-  - Criamos também o arquivo `postcss.config.cjs` manualmente.
-  - Editamos o `package.json` para incluir os scripts de build e dev do Tailwind.
-  - Resetamos o `index.css` para incluir as diretivas do Tailwind (`@tailwind base; @tailwind components; @tailwind utilities;`).
-  - O Tailwind parece não estar funcionando corretamente, então vamos investigar isso mais tarde. Os passos abaixo também foram feitos, mas o Tailwind não está aplicando os estilos como esperado.
-  - Descobri que para a v3 e a v$ do Tailwind, têm instalações diferentes. Usei o comando `npm install -D tailwindcss@3` e o Tailwind começou a funcionar corretamente.
-- [X] Configurar `tailwind.config.cjs`:
-```javascript
-module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
-  theme: { extend: {} },
-  plugins: [],
-};
-```
-- [X] No `src/index.css`, adicionar diretivas do Tailwind:
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-  - Retiramos essas diretivas e aplicaremos CSS vanilla por enquanto, já que o Tailwind não está funcionando corretamente.
-  - Retornamos as diretivas de volta após descobrir que o Tailwind estava funcionando corretamente.
-- [X] Em `App.tsx`, remover conteúdo de exemplo e exibir “Hello Codex Arcana” dentro de uma `<div className="p-4 text-2xl">`.
+3. **Front React: CampaignList e CampaignForm (lista + criação/edição)**
+- [ ] **Definir rotas de navegação no React (React Router)**
+  - [ ] Instalar e configurar `react-router-dom`.
+  - [ ] Criar página `CampaignListPage` (por exemplo, `/campanhas`).
+  - [ ] Criar página `CampaignFormPage` para criação e edição (por exemplo, `/campanhas/novo` e `/campanhas/:id/editar`).
+  - [ ] Ajustar `<App />` para renderizar esses componentes conforme a rota.
+- [ ] **Implementar CampaignList (para a página de listagem)**
+  - [ ] Criar componente `CampaignList.tsx` que serve de container: recupera array de campaigns da API ao montar (usando `useEffect`).
+  - [ ] Fazer fetch em `GET /api/campaigns` e armazenar no estado (por exemplo, `const [campaigns, setCampaigns] = useState<Campaign[]>([])`).
+  - [ ] Exibir lista de campaigns em tabela ou cards: cada linha deve mostrar nome e breve descrição, e botões “Editar” e “Excluir”.
+  - [ ] Botão “Nova Campanha” que leva à rota `/campanhas/novo`.
+  - [ ] Botão “Excluir” dispara `DELETE /api/campaigns/{id}`, em seguida refaz a listagem ou remove item do array local.
+  - [ ] Botão “Editar” leva à rota `/campanhas/{id}/editar`.
+- [ ] **Implementar CampaignForm (para criar ou editar)**
+  - [ ] Criar componente `CampaignForm.tsx` que recebe prop opcional `id` (caso edição) ou usa “novo”.
+  - [ ] Se houver `id`, fazer fetch em `GET /api/campaigns/{id}` e preencher campos (nome, descrição).
+  - [ ] Campos do formulário:
+    - Input de texto para “Nome” (obrigatório).
+    - Textarea para “Descrição” (opcional).
+    - Outros campos de metadados (se decidirmos incluir, por exemplo, “Status”).
+  - [ ] Botão “Salvar”:
+    - Se for “novo”, faz `POST /api/campaigns` com payload JSON.
+    - Se for “edição”, faz `PUT /api/campaigns/{id}` com payload JSON.
+    - Tratamento de feedback:
+      - Enquanto aguarda resposta, mostrar spinner ou desabilitar botão.
+      - Se sucesso, redirecionar para `/campanhas` e exibir mensagem “Campanha salva com sucesso”.
+      - Se erro (nome vazio, falha no servidor), exibir mensagem de validação ou de erro genérico.
+- [ ] **Testar interações no navegador**
+  - [ ] Acessar `/campanhas` sem nenhuma campanha: lista vazia ou mensagem “Nenhuma campanha cadastrada”.
+  - [ ] Clicar em “Nova Campanha” → formulário aparece vazio. Preencher e salvar → retorna para listagem com a nova campanha visível.
+  - [ ] Clicar em “Editar” de uma campanha existente → formulário com dados carregados; alterar e salvar → listagem atualizada.
+  - [ ] Clicar em “Excluir” de uma campanha → confirmação (opcional) e remoção do item na lista.
 
-4. **Ajustar CORS no Backend**
+4. **Modelagem SQLite para Session (vinculada à Campaign)**
+- [ ] **Definir a struct Session no backend (Go)**
+  - [ ] Estrutura básica: `type Session struct { ID int; CampaignID int; Title string; Date time.Time; Location string; Notes string; CreatedAt time.Time; UpdatedAt time.Time }`
+  - [ ] Verificar quais campos são obrigatórios (no mínimo, `CampaignID` e `Title`).
+  - [ ] Incluir relacionamento: `CampaignID` como campo estrangeiro que referencia `campaigns.id`.
+- [ ] **Criar a tabela sessions no banco SQLite**
+  - [ ] Escrever comando SQL para criar a tabela:
+  
+  ```sql
+  CREATE TABLE IF NOT EXISTS sessions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    campaign_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    date DATETIME,
+    location TEXT,
+    notes TEXT,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (campaign_id) REFERENCES campaigns(id) ON DELETE CASCADE
+  );
+  ```
+  - [ ] Adicionar esse comando ao mesmo “migration” ou função `initDB()` do backend, logo após a criação da tabela `campaigns`.
+  - [ ] Testar manualmente: verificar no DB Browser se a tabela aparece com a referência correta (relacionamento).
+- [ ] **Implementar métodos de acesso ao banco (Data Access Layer) para Session**
+  - [ ] `func CreateSession(s Session) (Session, error)` → insere no SQLite retornando o session criado.
+  - [ ] `func GetSessionsByCampaign(campaignID int) ([]Session, error)` → lista todas as sessions de uma campanha específica (`SELECT * FROM sessions WHERE campaign_id = ?`).
+  - [ ] `func GetSessionByID(id int) (Session, error)` → recupera session por ID.
+  - [ ] `func UpdateSession(s Session) error` → faz `UPDATE sessions SET title=?, date=?, location=?, notes=?, updated_at=? WHERE id=?`.
+  - [ ] `func DeleteSession(id int) error` → faz `DELETE FROM sessions WHERE id = ?`.
+  - [ ] Testar cada função isoladamente (logs ou testes automatizados).
 
-- [X] Instalar pacote de middleware CORS (por exemplo: `github.com/rs/cors`).
-  - Para referência, CORS é um middleware que permite que o servidor Go aceite requisições de origens diferentes (como portas diferentes para servidores de front e back end).
-  - Middleware, por outro lado, são intermediários que processam requisições HTTP antes de chegarem ao handler final.
-- [X] No `main.go`, antes de `http.ListenAndServe`, envolver o mux principal com o handler CORS:
-```go
-mux := http.NewServeMux()
-mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-  w.Write([]byte("pong"))
-})
-handler := cors.Default().Handler(mux)
-log.Fatal(http.ListenAndServe(":3000", handler))
-```
-- [ ] Testar localmente: `curl localhost:3000/ping`.
+5. **Endpoints REST Session**
+- [ ] **Definir rotas no servidor Go para Session**
+  - [ ] `GET /api/campaigns/{campaignID}/sessions` → retorna todas as sessions daquela campanha (chama `GetSessionsByCampaign`).
+  - [ ] `GET /api/sessions/{id}` → retorna uma session pelo ID (chama `GetSessionByID`).
+  - [ ] `POST /api/campaigns/{campaignID}/sessions` → cria nova session em campanha específica.
+  - [ ] `PUT /api/sessions/{id}` → atualiza session existente.
+  - [ ] `DELETE /api/sessions/{id}` → remove session.
+- [ ] **Implementar handlers HTTP para Session**
+  - [ ] `GET /api/campaigns/{campaignID}/sessions`
+    - Ler parâmetro `campaignID` da rota.
+    - Chamar `GetSessionsByCampaign(campaignID)` e retornar JSON array.
+    - Se `campaignID` inválido (não numérico), retornar 400; se não houver sessions, retornar array vazio.
+  - [ ] `GET /api/sessions/{id}`
+    - Ler parâmetro `id`, chamar `GetSessionByID(id)`.
+    - Se não encontrar, retornar 404; se encontrar, retornar JSON.
+  - [ ] `POST /api/campaigns/{campaignID}/sessions`
+    - Ler `campaignID` da rota; decodificar JSON com campos da session (`title`, `date`, `location`, `notes`).
+    - Definir `s.CampaignID = campaignID`; chamar `CreateSession(s)`.
+    - Retornar 201 com JSON do registro criado.
+  - [ ] `PUT /api/sessions/{id}`
+    - Ler `id` da rota; decodificar JSON para struct Session.
+    - Garantir que o payload tenha `CampaignID` correto ou ignorar esse campo (mantém a campanha original).
+    - Chamar `UpdateSession(s)`.
+  - [ ] `DELETE /api/sessions/{id}`
+    - Ler `id` da rota; chamar `DeleteSession(id)`.
+    - Retornar 204 se sucesso, 404 se não encontrado.
+- [ ] **Testar rotas de Session via cURL ou Postman**
+  - [ ] Criar uma campanha primeiro; depois:
+    - `curl -X GET http://localhost:3000/api/campaigns/1/sessions`
+    - `curl -X POST http://localhost:3000/api/campaigns/1/sessions -d '{"title":"Sessão 1","date":"2025-06-10","location":"Taverna","notes":"Notas livres"}' -H "Content-Type: application/json"`
+    - `curl -X GET http://localhost:3000/api/sessions/1`
+    - `curl -X PUT http://localhost:3000/api/sessions/1 -d '{"title":"Sessão 1 Atualizada","location":"Castelo"}' -H "Content-Type: application/json"`
+    - `curl -X DELETE http://localhost:3000/api/sessions/1`
+  - [ ] Confirmar códigos de resposta e payloads.
 
-5. **Conectar Frontend ao Backend**
-- [X] Em `App.tsx`, usar `useEffect(() => { fetch("http://localhost:3000/ping").then(...) }, [])`.
-- [X] Exibir no console devtools ou dentro de um `<p>` o texto “pong”.
+6. **Front React: SessionList e SessionForm**
+- [ ] **Adicionar rotas e navegação para Sessions**
+  - [ ] Na configuração do `react-router-dom`, criar rota aninhada:
+    - `/campanhas/:campaignID/sessoes` → renderiza `SessionListPage`.
+    - `/campanhas/:campaignID/sessoes/novo` → renderiza `SessionFormPage` (criação).
+    - `/campanhas/:campaignID/sessoes/:id/editar` → renderiza `SessionFormPage` (edição).
+  - [ ] Ajustar breadcrumbs ou link de volta para “Campanhas” quando estiver dentro das sessions.
+- [ ] **Implementar SessionList (para a página de listagem)**
+  - [ ] Criar componente `SessionList.tsx`:
+    - Ler `campaignID` dos parâmetros de rota (usando `useParams`).
+    - Fazer fetch em `GET /api/campaigns/{campaignID}/sessions` e armazenar em estado local.
+    - Exibir lista de sessions em ordem cronológica (ordenar pelo campo `date`).
+    - Cada linha deve mostrar `title`, `date` (formatada), `location`, e botões “Editar” e “Excluir”.
+    - Botão “Nova Sessão” que leva para `/campanhas/{campaignID}/sessoes/novo`.
+    - Botão “Excluir” dispara `DELETE /api/sessions/{id}`, e ao remover, atualiza lista localmente sem recarregar toda a página.
+    - Botão “Editar” leva à rota `/campanhas/{campaignID}/sessoes/{id}/editar`.
+- [ ] **Implementar SessionForm (para criar ou editar)**
+  - [ ] Criar componente `SessionForm.tsx`:
+    - Entrar em “modo criação” se não houver `id` nos parâmetros, ou “modo edição” se houver.
+    - No modo edição, ao montar, fazer fetch em `GET /api/sessions/{id}` e preencher campos.
+    - Campos do formulário:
+      - Input para “Título” (obrigatório).
+      - Input de data (`<input type="date">`) para “Data” (opcional).
+      - Input de texto para “Local” (opcional).
+      - Textarea para “Notas” (opcional).
+    - Botão “Salvar”:
+      - Se criação, faz `POST /api/campaigns/{campaignID}/sessions` com payload JSON.
+      - Se edição, faz `PUT /api/sessions/{id}` com payload JSON.
+      - Ao salvar com sucesso, redirecionar para `/campanhas/{campaignID}/sessoes` e exibir mensagem “Sessão salva com sucesso”.
+      - Validações simples: `title` não pode estar vazio; se `date` informado, deve ser data válida.
+- [ ] **Testar interações no navegador (Modo Sessões)**
+  - [ ] Acessar `/campanhas/1/sessoes` sem nenhuma sessão → lista vazia ou mensagem “Nenhuma sessão cadastrada”.
+  - [ ] Clicar em “Nova Sessão” → formulário aparece em branco. Preencher e salvar → retorna para listagem com nova sessão.
+  - [ ] Clicar em “Editar” de uma sessão existente → formulário com dados carregados; editar e salvar → listagem atualizada.
+  - [ ] Clicar em “Excluir” de uma sessão → confirmação (opcional) e remoção imediata da lista.
 
-6. **Commit & Push**
-- [X] Criar branch `milestone1-skeleton` ou trabalhar diretamente em `main` se for conveniente.
-- [X] Fazer commits granulares (um para o skeleton Go, outro para o React + Tailwind, outro para a integração fetch).
-- [X] Push para o GitHub e abrir um PR (caso queira revisão automática).
+# Checklist Geral do Epic 2
+## 2.1. Modelagem SQLite para Campaign
+- [ ] Definir `struct Campaign` no Go
+- [ ] Configurar conexão SQLite no startup
+- [ ] Criar tabela `campaigns` via comando SQL
+- [ ] Implementar funções CRUD (`CreateCampaign`, `GetAllCampaigns`, `GetCampaignByID`, `UpdateCampaign`, `DeleteCampaign`)
+## 2.2. Endpoints REST Campaign
+- [ ] Registrar rota `GET /api/campaigns`
+- [ ] Registrar rota `GET /api/campaigns/{id}`
+- [ ] Registrar rota `POST /api/campaigns`
+- [ ] Registrar rota `PUT /api/campaigns/{id}`
+- [ ] Registrar rota `DELETE /api/campaigns/{id}`
+- [ ] Implementar handlers com validações e status codes corretos
+- [ ] Testar cada rota (cURL/Postman)
+## 2.3. Front React: CampaignList e CampaignForm
+- [ ] Configurar `react-router-dom` para `/campanhas`, `/campanhas/novo`, `/campanhas/:id/editar`
+- [ ] Implementar componente `CampaignList`:
+  - [ ] Fetch de `GET /api/campaigns`
+  - [ ] Exibir lista em tabela ou cards
+  - [ ] Botões “Editar” e “Excluir” para cada item
+  - [ ] Botão “Nova Campanha”
+- [ ] Implementar componente `CampaignForm`:
+  - [ ] Fetch de `GET /api/campaigns/{id}` se modo edição
+  - [ ] Inputs para “Nome” e “Descrição”
+  - [ ] Botão “Salvar” chamando POST ou PUT
+  - [ ] Feedback de loading, sucessos e erros
+  - [ ] Redirecionar e exibir mensagem ao salvar
+## 2.4. Modelagem SQLite para Session
+- [ ] Definir `struct Session` (incluindo `CampaignID`)
+- [ ] Criar tabela `sessions` com foreign key para `campaigns`
+- [ ] Implementar funções CRUD (`CreateSession`, `GetSessionsByCampaign`, `GetSessionByID`, `UpdateSession`, `DeleteSession`)
+## 2.5. Endpoints REST Session
+- [ ] Registrar rota `GET /api/campaigns/{campaignID}/sessions`
+- [ ] Registrar rota `GET /api/sessions/{id}`
+- [ ] Registrar rota `POST /api/campaigns/{campaignID}/sessions`
+- [ ] Registrar rota `PUT /api/sessions/{id}`
+- [ ] Registrar rota `DELETE /api/sessions/{id}`
+- [ ] Implementar handlers com validações e status codes corretos
+- [ ] Testar cada rota (cURL/Postman)
+## 2.6. Front React: SessionList e SessionForm
+- [ ] Configurar rotas:
+  - [ ] `/campanhas/:campaignID/sessoes` (listar)
+  - [ ] `/campanhas/:campaignID/sessoes/novo` (criar)
+  - [ ] `/campanhas/:campaignID/sessoes/:id/editar` (editar)
+- [ ] Implementar componente `SessionList`:
+  - [ ] Fetch de `GET /api/campaigns/{campaignID}/sessions`
+  - [ ] Exibir lista ordenada por data
+  - [ ] Botões “Editar” e “Excluir” para cada item
+  - [ ] Botão “Nova Sessão”
+- [ ] Implementar componente `SessionForm`:
+  - [ ] Fetch de `GET /api/sessions/{id}` se modo edição
+  - [ ] Inputs para “Título”, “Data”, “Local” e “Notas”
+  - [ ] Botão “Salvar” chamando POST ou PUT
+  - [ ] Feedback de loading, sucessos e erros
+  - [ ] Redirecionar e exibir mensagem ao salvar
 
+## Observações Finais
+
+### 1. Separar Branches por Story ou Subdivisão
+* Quando for iniciar cada Story (1, 2, etc.), crie uma branch específica: por exemplo, `feature/1-model-campaign` para não misturar tarefas.
+* Ao terminar cada Story, abra um Pull Request e revisaremos juntos antes de mesclar.
+
+### 2. Boas Práticas de Commit e Documentação
+* Em cada commit, descreva claramente o que foi feito: ex.: “Adiciona tabela campaigns no SQLite e inicializa DB”.
+* Se algum passo gerar dúvida (ex.: erro de SQL X ou CORS Y), registre no README ou em comentários de código para referência futura.
+
+### 3. Testes Manuais & Registro de Bugs
+* Antes de marcar cada tarefa como concluída, realize testes manuais básicos (via cURL/Postman no backend; navegação e formulários no frontend).
+* Se aparecer um bug, abra um Issue específico (ex.: “Erro 500 ao criar campaign sem description”) e trate antes de prosseguir.
+
+### 4. Iteração Contínua
+* Assim que a listagem de Campaigns e Sessions estiver funcionando, podemos revisitar e criar testes unitários/metódicos para o Data Access Layer e handlers HTTP.
+* No frontend, implementar feedback de carregamento (“Loading…”) nas chamadas assíncronas para melhorar UX.
+
+Com este checklist detalhado, temos uma visão clara de tudo que precisa ser feito para concluir o Epic 2.
 
