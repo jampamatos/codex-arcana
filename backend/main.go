@@ -10,7 +10,6 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
 )
 
-//go:embed all:frontend/dist
 var assets embed.FS
 
 func main() {
@@ -38,7 +37,18 @@ func main() {
 		mux.HandleFunc("/api/campaigns/", campaignHandler)
 
 		// Apply CORS middleware to the mux server
-		handler := cors.Default().Handler(mux)
+		handler := cors.New(cors.Options{
+			AllowedOrigins: []string{"*"}, // Allow all origins
+			AllowedMethods: []string{
+				http.MethodGet,
+				http.MethodPost,
+				http.MethodPut,
+				http.MethodDelete,
+				http.MethodOptions,
+			},
+			AllowedHeaders:   []string{"*"},
+			AllowCredentials: true, // Allow credentials
+		}).Handler(mux)
 
 		// Start the HTTP server on port 3000 with CORS enabled
 		http.ListenAndServe(":3000", handler)

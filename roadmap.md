@@ -140,39 +140,39 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
     - Tudo testado via Postman, retornando os códigos corretos e payloads esperados.
 
 3. **Front React: CampaignList e CampaignForm (lista + criação/edição)**
-- [ ] **Definir rotas de navegação no React (React Router)**
-  - [ ] Instalar e configurar `react-router-dom`.
-  - [ ] Criar página `CampaignListPage` (por exemplo, `/campanhas`).
-  - [ ] Criar página `CampaignFormPage` para criação e edição (por exemplo, `/campanhas/novo` e `/campanhas/:id/editar`).
-  - [ ] Ajustar `<App />` para renderizar esses componentes conforme a rota.
-- [ ] **Implementar CampaignList (para a página de listagem)**
-  - [ ] Criar componente `CampaignList.tsx` que serve de container: recupera array de campaigns da API ao montar (usando `useEffect`).
-  - [ ] Fazer fetch em `GET /api/campaigns` e armazenar no estado (por exemplo, `const [campaigns, setCampaigns] = useState<Campaign[]>([])`).
-  - [ ] Exibir lista de campaigns em tabela ou cards: cada linha deve mostrar nome e breve descrição, e botões “Editar” e “Excluir”.
-  - [ ] Botão “Nova Campanha” que leva à rota `/campanhas/novo`.
-  - [ ] Botão “Excluir” dispara `DELETE /api/campaigns/{id}`, em seguida refaz a listagem ou remove item do array local.
-  - [ ] Botão “Editar” leva à rota `/campanhas/{id}/editar`.
-- [ ] **Implementar CampaignForm (para criar ou editar)**
-  - [ ] Criar componente `CampaignForm.tsx` que recebe prop opcional `id` (caso edição) ou usa “novo”.
-  - [ ] Se houver `id`, fazer fetch em `GET /api/campaigns/{id}` e preencher campos (nome, descrição).
-  - [ ] Campos do formulário:
+- [X] **Definir rotas de navegação no React (React Router)**
+  - [X] Instalar e configurar `react-router-dom`.
+  - [X] Criar página `CampaignListPage` (por exemplo, `/campanhas`).
+  - [X] Criar página `CampaignFormPage` para criação e edição (por exemplo, `/campanhas/novo` e `/campanhas/:id/editar`).
+  - [X] Ajustar `<App />` para renderizar esses componentes conforme a rota.
+- [X] **Implementar CampaignList (para a página de listagem)**
+  - [X] Criar componente `CampaignList.tsx` que serve de container: recupera array de campaigns da API ao montar (usando `useEffect`).
+  - [X] Fazer fetch em `GET /api/campaigns` e armazenar no estado (por exemplo, `const [campaigns, setCampaigns] = useState<Campaign[]>([])`).
+  - [X] Exibir lista de campaigns em tabela ou cards: cada linha deve mostrar nome e breve descrição, e botões “Editar” e “Excluir”.
+  - [X] Botão “Nova Campanha” que leva à rota `/campanhas/novo`.
+  - [X] Botão “Excluir” dispara `DELETE /api/campaigns/{id}`, em seguida refaz a listagem ou remove item do array local.
+  - [X] Botão “Editar” leva à rota `/campanhas/{id}/editar`.
+- [X] **Implementar CampaignForm (para criar ou editar)**
+  - [X] Criar componente `CampaignForm.tsx` que recebe prop opcional `id` (caso edição) ou usa “novo”.
+  - [X] Se houver `id`, fazer fetch em `GET /api/campaigns/{id}` e preencher campos (nome, descrição).
+  - [X] Campos do formulário:
     - Input de texto para “Nome” (obrigatório).
     - Textarea para “Descrição” (opcional).
     - Outros campos de metadados (se decidirmos incluir, por exemplo, “Status”).
-  - [ ] Botão “Salvar”:
+  - [X] Botão “Salvar”:
     - Se for “novo”, faz `POST /api/campaigns` com payload JSON.
     - Se for “edição”, faz `PUT /api/campaigns/{id}` com payload JSON.
     - Tratamento de feedback:
       - Enquanto aguarda resposta, mostrar spinner ou desabilitar botão.
       - Se sucesso, redirecionar para `/campanhas` e exibir mensagem “Campanha salva com sucesso”.
       - Se erro (nome vazio, falha no servidor), exibir mensagem de validação ou de erro genérico.
-- [ ] **Testar interações no navegador**
-  - [ ] Acessar `/campanhas` sem nenhuma campanha: lista vazia ou mensagem “Nenhuma campanha cadastrada”.
-  - [ ] Clicar em “Nova Campanha” → formulário aparece vazio. Preencher e salvar → retorna para listagem com a nova campanha visível.
-  - [ ] Clicar em “Editar” de uma campanha existente → formulário com dados carregados; alterar e salvar → listagem atualizada.
-  - [ ] Clicar em “Excluir” de uma campanha → confirmação (opcional) e remoção do item na lista.
+- [X] **Testar interações no navegador**
+  - [X] Acessar `/campanhas` sem nenhuma campanha: lista vazia ou mensagem “Nenhuma campanha cadastrada”.
+  - [X] Clicar em “Nova Campanha” → formulário aparece vazio. Preencher e salvar → retorna para listagem com a nova campanha visível.
+  - [X] Clicar em “Editar” de uma campanha existente → formulário com dados carregados; alterar e salvar → listagem atualizada.
+  - [X] Clicar em “Excluir” de uma campanha → confirmação (opcional) e remoção do item na lista.
 
-1. **Modelagem SQLite para Session (vinculada à Campaign)**
+4. **Modelagem SQLite para Session (vinculada à Campaign)**
 - [ ] **Definir a struct Session no backend (Go)**
   - [ ] Estrutura básica: `type Session struct { ID int; CampaignID int; Title string; Date time.Time; Location string; Notes string; CreatedAt time.Time; UpdatedAt time.Time }`
   - [ ] Verificar quais campos são obrigatórios (no mínimo, `CampaignID` e `Title`).
@@ -349,4 +349,3 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
 * No frontend, implementar feedback de carregamento (“Loading…”) nas chamadas assíncronas para melhorar UX.
 
 Com este checklist detalhado, temos uma visão clara de tudo que precisa ser feito para concluir o Epic 2.
-
