@@ -25,6 +25,9 @@ O milestone inicial foi concluído e novas funcionalidades já foram adicionadas
   - `PUT /api/campaigns/{id}` – atualiza campanha
   - `DELETE /api/campaigns/{id}` – remove campanha
 - Frontend React configurado e integrado, exibindo a versão obtida do backend.
+- **CRUD completo de Campaigns no frontend**: páginas React para listar, criar e
+  editar campanhas (`/campaigns`, `/campaigns/new`, `/campaigns/:id/edit`) com
+  opção de exclusão na listagem.
 - Testes básicos do DAO podem ser executados com `go test ./...` dentro de `backend/`.
 
 ## Pré-requisitos
