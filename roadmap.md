@@ -195,13 +195,13 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
   ```
   - [X] Adicionar esse comando ao mesmo “migration” ou função `initDB()` do backend, logo após a criação da tabela `campaigns`.
   - [X] Testar manualmente: verificar no DB Browser se a tabela aparece com a referência correta (relacionamento).
-- [ ] **Implementar métodos de acesso ao banco (Data Access Layer) para Session**
-  - [ ] `func CreateSession(s Session) (Session, error)` → insere no SQLite retornando o session criado.
-  - [ ] `func GetSessionsByCampaign(campaignID int) ([]Session, error)` → lista todas as sessions de uma campanha específica (`SELECT * FROM sessions WHERE campaign_id = ?`).
-  - [ ] `func GetSessionByID(id int) (Session, error)` → recupera session por ID.
-  - [ ] `func UpdateSession(s Session) error` → faz `UPDATE sessions SET title=?, date=?, location=?, notes=?, updated_at=? WHERE id=?`.
-  - [ ] `func DeleteSession(id int) error` → faz `DELETE FROM sessions WHERE id = ?`.
-  - [ ] Testar cada função isoladamente (logs ou testes automatizados).
+- [X] **Implementar métodos de acesso ao banco (Data Access Layer) para Session**
+  - [X] `func CreateSession(s Session) (Session, error)` → insere no SQLite retornando o session criado.
+  - [X] `func GetSessionsByCampaign(campaignID int) ([]Session, error)` → lista todas as sessions de uma campanha específica (`SELECT * FROM sessions WHERE campaign_id = ?`).
+  - [X] `func GetSessionByID(id int) (Session, error)` → recupera session por ID.
+  - [X] `func UpdateSession(s Session) error` → faz `UPDATE sessions SET title=?, date=?, location=?, notes=?, updated_at=? WHERE id=?`.
+  - [X] `func DeleteSession(id int) error` → faz `DELETE FROM sessions WHERE id = ?`.
+  - [X] Testar cada função isoladamente (logs ou testes automatizados).
 
 5. **Endpoints REST Session**
 - [ ] **Definir rotas no servidor Go para Session**
