@@ -1,3 +1,5 @@
+// File: frontend/master/src/pages/CampaignFormPage.tsx
+
 import React, { useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';

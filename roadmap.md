@@ -173,12 +173,12 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
   - [X] Clicar em “Excluir” de uma campanha → confirmação (opcional) e remoção do item na lista.
 
 4. **Modelagem SQLite para Session (vinculada à Campaign)**
-- [ ] **Definir a struct Session no backend (Go)**
-  - [ ] Estrutura básica: `type Session struct { ID int; CampaignID int; Title string; Date time.Time; Location string; Notes string; CreatedAt time.Time; UpdatedAt time.Time }`
-  - [ ] Verificar quais campos são obrigatórios (no mínimo, `CampaignID` e `Title`).
-  - [ ] Incluir relacionamento: `CampaignID` como campo estrangeiro que referencia `campaigns.id`.
-- [ ] **Criar a tabela sessions no banco SQLite**
-  - [ ] Escrever comando SQL para criar a tabela:
+- [X] **Definir a struct Session no backend (Go)**
+  - [X] Estrutura básica: `type Session struct { ID int; CampaignID int; Title string; Date time.Time; Location string; Notes string; CreatedAt time.Time; UpdatedAt time.Time }`
+  - [X] Verificar quais campos são obrigatórios (no mínimo, `CampaignID` e `Title`).
+  - [X] Incluir relacionamento: `CampaignID` como campo estrangeiro que referencia `campaigns.id`.
+- [X] **Criar a tabela sessions no banco SQLite**
+  - [X] Escrever comando SQL para criar a tabela:
   
   ```sql
   CREATE TABLE IF NOT EXISTS sessions (
@@ -193,8 +193,8 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
     FOREIGN KEY (campaign_id) REFERENCES campaigns(id) ON DELETE CASCADE
   );
   ```
-  - [ ] Adicionar esse comando ao mesmo “migration” ou função `initDB()` do backend, logo após a criação da tabela `campaigns`.
-  - [ ] Testar manualmente: verificar no DB Browser se a tabela aparece com a referência correta (relacionamento).
+  - [X] Adicionar esse comando ao mesmo “migration” ou função `initDB()` do backend, logo após a criação da tabela `campaigns`.
+  - [X] Testar manualmente: verificar no DB Browser se a tabela aparece com a referência correta (relacionamento).
 - [ ] **Implementar métodos de acesso ao banco (Data Access Layer) para Session**
   - [ ] `func CreateSession(s Session) (Session, error)` → insere no SQLite retornando o session criado.
   - [ ] `func GetSessionsByCampaign(campaignID int) ([]Session, error)` → lista todas as sessions de uma campanha específica (`SELECT * FROM sessions WHERE campaign_id = ?`).
