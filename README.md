@@ -6,7 +6,7 @@ Este repositório é um monorepo contendo o backend em Go/Wails e o frontend em 
 
 ## Arquitetura
 
-- `backend/` – Projeto [Wails](https://wails.io/) em Go. Além dos endpoints básicos (`/ping` e `/api/version`), agora inicializa um banco SQLite (`campaign.db`) e expõe a API REST de Campaign.
+- `backend/` – Projeto [Wails](https://wails.io/) em Go. Além dos endpoints básicos (`/ping` e `/api/version`), inicializa o banco SQLite (`database.db`) com as tabelas `campaigns` e `sessions` e expõe a API REST de Campaign.
 - `frontend/master/` – Aplicação React + Vite + Tailwind que consome esses endpoints. Servirá como interface do mestre.
 
 Outros módulos (wiki estática, PWA para jogadores, etc.) serão adicionados conforme o roadmap.
@@ -17,7 +17,7 @@ O milestone inicial foi concluído e novas funcionalidades já foram adicionadas
 
 - Skeleton do backend em Go criado com Wails.
 - Endpoints `/ping` e `/api/version` disponíveis e com CORS habilitado.
-- **Persistência em SQLite** via arquivo `campaign.db`, com modelo `Campaign` e funções CRUD (`CreateCampaign`, `GetAllCampaigns`, `GetCampaignByID`, `UpdateCampaign`, `DeleteCampaign`).
+- **Persistência em SQLite** via arquivo `database.db` com modelos `Campaign` e `Session` (relacionados por chave estrangeira). Funções CRUD de `Campaign` já implementadas.
 - **API REST de Campaign** com rotas:
   - `GET /api/campaigns` – lista todas as campanhas
   - `GET /api/campaigns/{id}` – retorna uma campanha específica
@@ -28,7 +28,8 @@ O milestone inicial foi concluído e novas funcionalidades já foram adicionadas
 - **CRUD completo de Campaigns no frontend**: páginas React para listar, criar e
   editar campanhas (`/campaigns`, `/campaigns/new`, `/campaigns/:id/edit`) com
   opção de exclusão na listagem.
-- Testes básicos do DAO podem ser executados com `go test ./...` dentro de `backend/`.
+- **DAO de Session** com funções `CreateSession`, `GetSessionsByCampaign`, `GetSessionByID`, `UpdateSession` e `DeleteSession`.
+- Testes básicos do DAO (Campaign e Session) podem ser executados com `go test ./...` dentro de `backend/`.
 
 ## Pré-requisitos
 
