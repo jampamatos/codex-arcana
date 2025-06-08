@@ -276,53 +276,53 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
 
 # Checklist Geral do Epic 2
 ## 2.1. Modelagem SQLite para Campaign
-- [ ] Definir `struct Campaign` no Go
-- [ ] Configurar conexão SQLite no startup
-- [ ] Criar tabela `campaigns` via comando SQL
-- [ ] Implementar funções CRUD (`CreateCampaign`, `GetAllCampaigns`, `GetCampaignByID`, `UpdateCampaign`, `DeleteCampaign`)
+- [X] Definir `struct Campaign` no Go
+- [X] Configurar conexão SQLite no startup
+- [X] Criar tabela `campaigns` via comando SQL
+- [X] Implementar funções CRUD (`CreateCampaign`, `GetAllCampaigns`, `GetCampaignByID`, `UpdateCampaign`, `DeleteCampaign`)
 ## 2.2. Endpoints REST Campaign
-- [ ] Registrar rota `GET /api/campaigns`
-- [ ] Registrar rota `GET /api/campaigns/{id}`
-- [ ] Registrar rota `POST /api/campaigns`
-- [ ] Registrar rota `PUT /api/campaigns/{id}`
-- [ ] Registrar rota `DELETE /api/campaigns/{id}`
-- [ ] Implementar handlers com validações e status codes corretos
-- [ ] Testar cada rota (cURL/Postman)
+- [X] Registrar rota `GET /api/campaigns`
+- [X] Registrar rota `GET /api/campaigns/{id}`
+- [X] Registrar rota `POST /api/campaigns`
+- [X] Registrar rota `PUT /api/campaigns/{id}`
+- [X] Registrar rota `DELETE /api/campaigns/{id}`
+- [X] Implementar handlers com validações e status codes corretos
+- [X] Testar cada rota (cURL/Postman)
 ## 2.3. Front React: CampaignList e CampaignForm
-- [ ] Configurar `react-router-dom` para `/campanhas`, `/campanhas/novo`, `/campanhas/:id/editar`
-- [ ] Implementar componente `CampaignList`:
-  - [ ] Fetch de `GET /api/campaigns`
-  - [ ] Exibir lista em tabela ou cards
-  - [ ] Botões “Editar” e “Excluir” para cada item
-  - [ ] Botão “Nova Campanha”
-- [ ] Implementar componente `CampaignForm`:
-  - [ ] Fetch de `GET /api/campaigns/{id}` se modo edição
-  - [ ] Inputs para “Nome” e “Descrição”
-  - [ ] Botão “Salvar” chamando POST ou PUT
-  - [ ] Feedback de loading, sucessos e erros
-  - [ ] Redirecionar e exibir mensagem ao salvar
+- [X] Configurar `react-router-dom` para `/campanhas`, `/campanhas/novo`, `/campanhas/:id/editar`
+- [X] Implementar componente `CampaignList`:
+  - [X] Fetch de `GET /api/campaigns`
+  - [X] Exibir lista em tabela ou cards
+  - [X] Botões “Editar” e “Excluir” para cada item
+  - [X] Botão “Nova Campanha”
+- [X] Implementar componente `CampaignForm`:
+  - [X] Fetch de `GET /api/campaigns/{id}` se modo edição
+  - [X] Inputs para “Nome” e “Descrição”
+  - [X] Botão “Salvar” chamando POST ou PUT
+  - [X] Feedback de loading, sucessos e erros
+  - [X] Redirecionar e exibir mensagem ao salvar
 ## 2.4. Modelagem SQLite para Session
-- [ ] Definir `struct Session` (incluindo `CampaignID`)
-- [ ] Criar tabela `sessions` com foreign key para `campaigns`
-- [ ] Implementar funções CRUD (`CreateSession`, `GetSessionsByCampaign`, `GetSessionByID`, `UpdateSession`, `DeleteSession`)
+- [X] Definir `struct Session` (incluindo `CampaignID`)
+- [X] Criar tabela `sessions` com foreign key para `campaigns`
+- [X] Implementar funções CRUD (`CreateSession`, `GetSessionsByCampaign`, `GetSessionByID`, `UpdateSession`, `DeleteSession`)
 ## 2.5. Endpoints REST Session
-- [ ] Registrar rota `GET /api/campaigns/{campaignID}/sessions`
-- [ ] Registrar rota `GET /api/sessions/{id}`
-- [ ] Registrar rota `POST /api/campaigns/{campaignID}/sessions`
-- [ ] Registrar rota `PUT /api/sessions/{id}`
-- [ ] Registrar rota `DELETE /api/sessions/{id}`
-- [ ] Implementar handlers com validações e status codes corretos
-- [ ] Testar cada rota (cURL/Postman)
+- [X] Registrar rota `GET /api/campaigns/{campaignID}/sessions`
+- [X] Registrar rota `GET /api/sessions/{id}`
+- [X] Registrar rota `POST /api/campaigns/{campaignID}/sessions`
+- [X] Registrar rota `PUT /api/sessions/{id}`
+- [X] Registrar rota `DELETE /api/sessions/{id}`
+- [X] Implementar handlers com validações e status codes corretos
+- [X] Testar cada rota (cURL/Postman)
 ## 2.6. Front React: SessionList e SessionForm
-- [ ] Configurar rotas:
-  - [ ] `/campanhas/:campaignID/sessoes` (listar)
-  - [ ] `/campanhas/:campaignID/sessoes/novo` (criar)
-  - [ ] `/campanhas/:campaignID/sessoes/:id/editar` (editar)
-- [ ] Implementar componente `SessionList`:
-  - [ ] Fetch de `GET /api/campaigns/{campaignID}/sessions`
-  - [ ] Exibir lista ordenada por data
-  - [ ] Botões “Editar” e “Excluir” para cada item
-  - [ ] Botão “Nova Sessão”
+- [X] Configurar rotas:
+  - [X] `/campanhas/:campaignID/sessoes` (listar)
+  - [X] `/campanhas/:campaignID/sessoes/novo` (criar)
+  - [X] `/campanhas/:campaignID/sessoes/:id/editar` (editar)
+- [X] Implementar componente `SessionList`:
+  - [X] Fetch de `GET /api/campaigns/{campaignID}/sessions`
+  - [X] Exibir lista ordenada por data
+  - [X] Botões “Editar” e “Excluir” para cada item
+  - [X] Botão “Nova Sessão”
 - [ ] Implementar componente `SessionForm`:
   - [ ] Fetch de `GET /api/sessions/{id}` se modo edição
   - [ ] Inputs para “Título”, “Data”, “Local” e “Notas”
