@@ -29,6 +29,11 @@ O milestone inicial foi concluído e novas funcionalidades já foram adicionadas
   editar campanhas (`/campaigns`, `/campaigns/new`, `/campaigns/:id/edit`) com
   opção de exclusão na listagem.
 - **DAO de Session** com funções `CreateSession`, `GetSessionsByCampaign`, `GetSessionByID`, `UpdateSession` e `DeleteSession`.
+- **API REST de Session** com rotas:
+  - `GET /api/campaigns/{campaignID}/sessions` – lista sessões da campanha
+  - `POST /api/campaigns/{campaignID}/sessions` – cria nova sessão
+  - `PUT /api/campaigns/{campaignID}/sessions/{sessionID}` – atualiza sessão
+  - `DELETE /api/campaigns/{campaignID}/sessions/{sessionID}` – remove sessão
 - Testes básicos do DAO (Campaign e Session) podem ser executados com `go test ./...` dentro de `backend/`.
 
 ## Pré-requisitos
