@@ -204,49 +204,49 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
   - [X] Testar cada função isoladamente (logs ou testes automatizados).
 
 5. **Endpoints REST Session**
-- [ ] **Definir rotas no servidor Go para Session**
-  - [ ] `GET /api/campaigns/{campaignID}/sessions` → retorna todas as sessions daquela campanha (chama `GetSessionsByCampaign`).
-  - [ ] `GET /api/sessions/{id}` → retorna uma session pelo ID (chama `GetSessionByID`).
-  - [ ] `POST /api/campaigns/{campaignID}/sessions` → cria nova session em campanha específica.
-  - [ ] `PUT /api/sessions/{id}` → atualiza session existente.
-  - [ ] `DELETE /api/sessions/{id}` → remove session.
-- [ ] **Implementar handlers HTTP para Session**
-  - [ ] `GET /api/campaigns/{campaignID}/sessions`
+- [X] **Definir rotas no servidor Go para Session**
+  - [X] `GET /api/campaigns/{campaignID}/sessions` → retorna todas as sessions daquela campanha (chama `GetSessionsByCampaign`).
+  - [X] `GET /api/sessions/{id}` → retorna uma session pelo ID (chama `GetSessionByID`).
+  - [X] `POST /api/campaigns/{campaignID}/sessions` → cria nova session em campanha específica.
+  - [X] `PUT /api/sessions/{id}` → atualiza session existente.
+  - [X] `DELETE /api/sessions/{id}` → remove session.
+- [X] **Implementar handlers HTTP para Session**
+  - [X] `GET /api/campaigns/{campaignID}/sessions`
     - Ler parâmetro `campaignID` da rota.
     - Chamar `GetSessionsByCampaign(campaignID)` e retornar JSON array.
     - Se `campaignID` inválido (não numérico), retornar 400; se não houver sessions, retornar array vazio.
-  - [ ] `GET /api/sessions/{id}`
+  - [X] `GET /api/sessions/{id}`
     - Ler parâmetro `id`, chamar `GetSessionByID(id)`.
     - Se não encontrar, retornar 404; se encontrar, retornar JSON.
-  - [ ] `POST /api/campaigns/{campaignID}/sessions`
+  - [X] `POST /api/campaigns/{campaignID}/sessions`
     - Ler `campaignID` da rota; decodificar JSON com campos da session (`title`, `date`, `location`, `notes`).
     - Definir `s.CampaignID = campaignID`; chamar `CreateSession(s)`.
     - Retornar 201 com JSON do registro criado.
-  - [ ] `PUT /api/sessions/{id}`
+  - [X] `PUT /api/sessions/{id}`
     - Ler `id` da rota; decodificar JSON para struct Session.
     - Garantir que o payload tenha `CampaignID` correto ou ignorar esse campo (mantém a campanha original).
     - Chamar `UpdateSession(s)`.
-  - [ ] `DELETE /api/sessions/{id}`
+  - [X] `DELETE /api/sessions/{id}`
     - Ler `id` da rota; chamar `DeleteSession(id)`.
     - Retornar 204 se sucesso, 404 se não encontrado.
-- [ ] **Testar rotas de Session via cURL ou Postman**
-  - [ ] Criar uma campanha primeiro; depois:
+- [X] **Testar rotas de Session via cURL ou Postman**
+  - [X] Criar uma campanha primeiro; depois:
     - `curl -X GET http://localhost:3000/api/campaigns/1/sessions`
     - `curl -X POST http://localhost:3000/api/campaigns/1/sessions -d '{"title":"Sessão 1","date":"2025-06-10","location":"Taverna","notes":"Notas livres"}' -H "Content-Type: application/json"`
     - `curl -X GET http://localhost:3000/api/sessions/1`
     - `curl -X PUT http://localhost:3000/api/sessions/1 -d '{"title":"Sessão 1 Atualizada","location":"Castelo"}' -H "Content-Type: application/json"`
     - `curl -X DELETE http://localhost:3000/api/sessions/1`
-  - [ ] Confirmar códigos de resposta e payloads.
+  - [X] Confirmar códigos de resposta e payloads.
 
 6. **Front React: SessionList e SessionForm**
-- [ ] **Adicionar rotas e navegação para Sessions**
-  - [ ] Na configuração do `react-router-dom`, criar rota aninhada:
+- [X] **Adicionar rotas e navegação para Sessions**
+  - [X] Na configuração do `react-router-dom`, criar rota aninhada:
     - `/campanhas/:campaignID/sessoes` → renderiza `SessionListPage`.
     - `/campanhas/:campaignID/sessoes/novo` → renderiza `SessionFormPage` (criação).
     - `/campanhas/:campaignID/sessoes/:id/editar` → renderiza `SessionFormPage` (edição).
-  - [ ] Ajustar breadcrumbs ou link de volta para “Campanhas” quando estiver dentro das sessions.
-- [ ] **Implementar SessionList (para a página de listagem)**
-  - [ ] Criar componente `SessionList.tsx`:
+  - [X] Ajustar breadcrumbs ou link de volta para “Campanhas” quando estiver dentro das sessions.
+- [X] **Implementar SessionList (para a página de listagem)**
+  - [X] Criar componente `SessionList.tsx`:
     - Ler `campaignID` dos parâmetros de rota (usando `useParams`).
     - Fazer fetch em `GET /api/campaigns/{campaignID}/sessions` e armazenar em estado local.
     - Exibir lista de sessions em ordem cronológica (ordenar pelo campo `date`).
@@ -254,8 +254,8 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
     - Botão “Nova Sessão” que leva para `/campanhas/{campaignID}/sessoes/novo`.
     - Botão “Excluir” dispara `DELETE /api/sessions/{id}`, e ao remover, atualiza lista localmente sem recarregar toda a página.
     - Botão “Editar” leva à rota `/campanhas/{campaignID}/sessoes/{id}/editar`.
-- [ ] **Implementar SessionForm (para criar ou editar)**
-  - [ ] Criar componente `SessionForm.tsx`:
+- [X] **Implementar SessionForm (para criar ou editar)**
+  - [X] Criar componente `SessionForm.tsx`:
     - Entrar em “modo criação” se não houver `id` nos parâmetros, ou “modo edição” se houver.
     - No modo edição, ao montar, fazer fetch em `GET /api/sessions/{id}` e preencher campos.
     - Campos do formulário:
@@ -268,11 +268,11 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
       - Se edição, faz `PUT /api/sessions/{id}` com payload JSON.
       - Ao salvar com sucesso, redirecionar para `/campanhas/{campaignID}/sessoes` e exibir mensagem “Sessão salva com sucesso”.
       - Validações simples: `title` não pode estar vazio; se `date` informado, deve ser data válida.
-- [ ] **Testar interações no navegador (Modo Sessões)**
-  - [ ] Acessar `/campanhas/1/sessoes` sem nenhuma sessão → lista vazia ou mensagem “Nenhuma sessão cadastrada”.
-  - [ ] Clicar em “Nova Sessão” → formulário aparece em branco. Preencher e salvar → retorna para listagem com nova sessão.
-  - [ ] Clicar em “Editar” de uma sessão existente → formulário com dados carregados; editar e salvar → listagem atualizada.
-  - [ ] Clicar em “Excluir” de uma sessão → confirmação (opcional) e remoção imediata da lista.
+- [X] **Testar interações no navegador (Modo Sessões)**
+  - [X] Acessar `/campanhas/1/sessoes` sem nenhuma sessão → lista vazia ou mensagem “Nenhuma sessão cadastrada”.
+  - [X] Clicar em “Nova Sessão” → formulário aparece em branco. Preencher e salvar → retorna para listagem com nova sessão.
+  - [X] Clicar em “Editar” de uma sessão existente → formulário com dados carregados; editar e salvar → listagem atualizada.
+  - [X] Clicar em “Excluir” de uma sessão → confirmação (opcional) e remoção imediata da lista.
 
 # Checklist Geral do Epic 2
 ## 2.1. Modelagem SQLite para Campaign
@@ -323,12 +323,12 @@ Vamos dividir o trabalho em epics (módulos grandes) e, dentro de cada epic, use
   - [X] Exibir lista ordenada por data
   - [X] Botões “Editar” e “Excluir” para cada item
   - [X] Botão “Nova Sessão”
-- [ ] Implementar componente `SessionForm`:
-  - [ ] Fetch de `GET /api/sessions/{id}` se modo edição
-  - [ ] Inputs para “Título”, “Data”, “Local” e “Notas”
-  - [ ] Botão “Salvar” chamando POST ou PUT
-  - [ ] Feedback de loading, sucessos e erros
-  - [ ] Redirecionar e exibir mensagem ao salvar
+- [X] Implementar componente `SessionForm`:
+  - [X] Fetch de `GET /api/sessions/{id}` se modo edição
+  - [X] Inputs para “Título”, “Data”, “Local” e “Notas”
+  - [X] Botão “Salvar” chamando POST ou PUT
+  - [X] Feedback de loading, sucessos e erros
+  - [X] Redirecionar e exibir mensagem ao salvar
 
 ## Observações Finais
 

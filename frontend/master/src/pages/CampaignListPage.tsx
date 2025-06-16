@@ -1,7 +1,7 @@
 // File: frontend/master/src/pages/CampaignListPage.tsx
 
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Interface that reflects backend Campaign model
 interface Campaign {
@@ -118,7 +118,11 @@ const CampaignListPage: React.FC = () => {
                     <tbody className="divide-y divide-gray-200">
                         {campaigns.map(c => (
                             <tr key={c.id}>
-                                <td className="px-4 py-2">{c.name}</td>
+                                <td className="px-4 py-2">
+                                    <Link to={`/campaigns/${c.id}/sessions`} className="text-blue-600 hover:underline">
+                                        {c.name}
+                                    </Link>
+                                </td>
                                 <td className="px-4 py-2">{c.description}</td>
                                 <td className="px-4 py-2 text-center space-x-2">
                                     <button
